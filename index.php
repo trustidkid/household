@@ -1,8 +1,8 @@
 <?php
     include('lib/header.php');
  ?>
-    <h3>This is the website to deal with health of family</h3>
-        <p>This is a specialist website</p>
+    <h3>Start.ng Hospital application</h3>
+        <p>This main to keep record of incidence case of COVID-19</p>
 
 <?php
 
