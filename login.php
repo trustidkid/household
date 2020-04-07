@@ -2,7 +2,7 @@
 include('lib/header.php'); 
 
 //if user has already logged in
-if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
+if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
     //redirect to dashboard
     header("location: dashboard.php");
 }
@@ -12,7 +12,7 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
     <?php
         if(isset($_SESSION['message'] ) && !empty(isset($_SESSION['message']))){
         echo "<span style='color: green' >" . $_SESSION['message'] . "</span>";
-        session_destroy();
+       // session_destroy();
     }
     ?>
 
@@ -24,7 +24,7 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
 <?php
     if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
     echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
-    session_unset();
+   // session_unset();
 }
  ?>
 

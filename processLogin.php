@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-print_r($_POST);
+//print_r($_POST);
 $counterror = 0;
 $username = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
 $password = $_POST['password'] != "" ? $_POST['password'] : $counterror++;
@@ -34,7 +34,7 @@ if( $counterror > 0){
     for($counter = 0; $counter < count($allusers); $counter++){
         
         //check for email
-        if($allusers[$counter] == $username.".json"){
+        if($allusers[$counter] == "admin@snh.com.json"){
             //echo "inside first loop " ."<br/>";
             $currentuser = $username.".json";
             //compare user password with database

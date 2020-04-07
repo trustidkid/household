@@ -2,7 +2,7 @@
     include('lib/header.php');
  ?>
     <h3>Start.ng Hospital application</h3>
-        <p>This main to keep record of incidence case of COVID-19</p>
+        <p>This setup to keep record of incidence cases of COVID-19</p>
 
 <?php
 

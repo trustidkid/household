@@ -3,12 +3,12 @@ include('lib/header.php');
 
 
 //if user has already logged in
-if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
+if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 
-    echo "GOT HERE ?????";
+   // echo "GOT HERE ?????";
     
     //Get the user designation
-   /* $folder = scandir("db/users");
+  /*  $folder = scandir("db/users");
     $countUsers = count($folder);
 
     for($counter = 0; $counter < $countUsers; $counter++){
