@@ -12,20 +12,22 @@ session_start();
    $designation = $_POST['designation'] != "" ? $_POST['designation'] : $errorcount++;
    $department = $_POST['department'] != "" ? $_POST['password'] : $errorcount++;
 
+   $splitemail = explode("@",$email);
+
    //check name contains number
    if(preg_match('~[0-9]~',$firstname) || preg_match('~[0-9]~',$lastname) || $firstname =="" || $lastname==""){
     $_SESSION['error'] = "Name cannot be blank or shouldn't have number";
     header('location: register.php');
     die();
 }
-if(strlen($lastname) < 2 || strlen($firstname) <2)  {
+if(strlen($lastname) < 2 || strlen($firstname) < 2)  {
     $_SESSION['error'] = "Provided name is too short";
     header('location: register.php');
     die();
 }
 
-if(strlen($email) < 5) {
-    $_SESSION['error'] = "Email cannot be less than 5 characters"; 
+if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
+    $_SESSION['error'] = "Email cannot be less than 5 characters and/or not a valid email";
     header('location: register.php');
     die();
 }
