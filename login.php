@@ -43,7 +43,9 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
 
 <p>
     <button type="submit">Login</button> <button type="reset">Reset</button>
+    
 </p>
+<p><a href="forgot.php">Forgot Password</a></p>
     
 </form>
 

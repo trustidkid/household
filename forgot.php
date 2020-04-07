@@ -2,9 +2,8 @@
 
 <h3>Forgot Password</h3>
 
-<input type="text" name="username" value="" placeholder="Please enter username">
-<input type="text" name="password" value="">
-<button type="submit">Change</button> 
-<button type="reset">Reset</button>
+<p><input type="text" name="username" value="" placeholder="Email address"></p>
+
+<p><button type="submit">Change</button></p>
 
 <?php include('lib/footer.php') ?>

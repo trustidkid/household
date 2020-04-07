@@ -11,6 +11,7 @@ $userDept = "";
 $userlevel = "";
 $lastlogintime = "";
 $dateregister = "";
+$logintime = "";
 
 if( $counterror > 0){
 
@@ -24,8 +25,6 @@ if( $counterror > 0){
 
 }else{
 
-    echo "reach here!";
-
     //$logintime = date('D, d M Y H:i:s');
     $logintime = date('d-m-yy H:i:s');
 
@@ -33,11 +32,10 @@ if( $counterror > 0){
     //$countusers = count($allusers);
 
     for($counter = 0; $counter < count($allusers); $counter++){
-
         
         //check for email
         if($allusers[$counter] == $username.".json"){
-            echo "inside first loop " ."<br/>";
+            //echo "inside first loop " ."<br/>";
             $currentuser = $username.".json";
             //compare user password with database
             $userString = file_get_contents("db/users/". $currentuser);
@@ -63,7 +61,6 @@ if( $counterror > 0){
             
                 }
 
-                echo "passsword correct ";
                 $loginobject = [
                     'email' => $username,
                     'logintime' => $logintime,
@@ -75,8 +72,10 @@ if( $counterror > 0){
                 $_SESSION['loggedIn'] = $username;
                 $_SESSION['department']= $userDept;
                 $_SESSION['userlevel'] = $userlevel;
-                $_SESSION['dateofreg'] = $dateregister;
-                $_SESSION['lastlogin'] = $lastlogintime; 
+                $_SESSION['dateregister'] = $dateregister;
+                $_SESSION['lastlogin'] = $lastlogintime;
+                $_SESSION['logintime'] = $logintime;
+                //$_SESSION['superadmin']= "admin";
 
                 header("location: dashboard.php");
 
@@ -91,9 +90,6 @@ if( $counterror > 0){
             }
         }
    } 
-
-    
-    
 }
 
 

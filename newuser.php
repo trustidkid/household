@@ -1,31 +1,10 @@
 <?php 
 include('lib/header.php'); 
-
-
 //if user has already logged in
 if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
-
-    echo "GOT HERE ?????";
-    
-    //Get the user designation
-   /* $folder = scandir("db/users");
-    $countUsers = count($folder);
-
-    for($counter = 0; $counter < $countUsers; $counter++){
-        
-        $getfile = file_get_contents("db/users/". $folder[$counter]);
-        $toJson = json_decode($getfile);
-        $email = $toJson -> email;
-        if($_SESSION['loggedIn'] == $email){
-
-            $designation = $toJson -> designation;
-            $_SESSION['userlevel'] = $designation;
-        }
-    } */
     //redirect to dashboard
     header("location: dashboard.php");
 }
-
 ?>
 <p>
 <H3><strong> Registeration Form </strong></H3>
@@ -49,7 +28,6 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
     session_unset();
 }
  ?>
-    
     type="text" name="firstname"  placeholder="First Name">
 </p>
 <p>

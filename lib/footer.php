@@ -1,5 +1,7 @@
 
 <p>
+Copywrite (c)2020
+<!-- <ul><a href="index.php">Home</a></ul>
             <a href="index.php">Home</a>
             <?php 
                 if(!isset($_SESSION['loggedIn'])){?>
@@ -11,7 +13,7 @@
                     <a href="logout.php">Logout</a>
                 <?php } ?>
             <a href="forgot.php">Forgot Password</a>
-
+-->
         </p>
     </body>
 </html>
