@@ -32,11 +32,11 @@ if( $counterror > 0){
     //$countusers = count($allusers);
 
     for($counter = 0; $counter < count($allusers); $counter++){
-        
+        $currentuser = $username.".json";
         //check for email
-        if($allusers[$counter] == "admin@snh.com.json"){
+        if($allusers[$counter] == $currentuser){
             //echo "inside first loop " ."<br/>";
-            $currentuser = $username.".json";
+            
             //compare user password with database
             $userString = file_get_contents("db/users/". $currentuser);
             $userObject = json_decode($userString);
