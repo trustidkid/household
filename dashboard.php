@@ -5,20 +5,27 @@
 <p>
 <h3>Dashboard</h3>
 
-<? if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
+<? if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == 'Super Admin'){
     
-    echo "<span style='color: green' >". "You are welcome: ". $_SESSION['loggedIn']. "</span>".
+    echo "<p>" ."<span style='color: green' >". "You are welcome: ". $_SESSION['loggedIn']. "</span>"."</p>".
+    "<p>"."<a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a>"."</p"."<p>".
     "<hr style='border: 2px solid'>"."<p>";
-    echo "<span style='color: green' >"."Below are your recorded Data"."</p>"."</span>"."</p>".
-    "<p> Time Login:  "."\t".$_SESSION['logintime']."</p>".
-    "<p> Department:  "."\t".$_SESSION['department']."</p>".
-     "<p> Access Level:  "."\t".$_SESSION['userlevel']."</p>".
-    "<p> Date Register: "."\t" . $_SESSION['dateregister']. "</p" ."<br/>".
-    //if(isset($_SESSION['lastlogin']) == "") {
-    //    echo "<p> Last Login time:". " First Timer ". "</p";
-    //} else 
-    "<p> Last Login time: " . $_SESSION['lastlogin']. "</p>";
-} 
+
+    echo "<div class='card bg-info text-white'>";
+    echo "<div class='card-header'><strong>Record Book</strong></div>";
+    echo "<div class='card-body'>Time In:- " . $_SESSION['logintime']. "</div>
+    <hr>
+    <div class='card-body'>Role:- ".$_SESSION['userlevel']."</div>
+    <hr>
+    <div class='card-body'>Department:- ".$_SESSION['department']."</div>
+    <hr>
+    <div class='card-body'>Date Register:- ".$_SESSION['dateregister']."</div>
+    <hr>
+    <div class='card-body'>Last Login Time:- ".$_SESSION['lastlogin']."</div>
+    <hr>
+  </div>";
+
+}
 
 $userlist = scandir("db/users/");
 //$email = $_SESSION['loggedIn'];
@@ -40,7 +47,7 @@ for($count=2; $count < count($userlist); $count++){
         $email = $staffObject -> email;
         $gender = $staffObject -> gender;
         
-        echo "<tr><td>".$firstname."</td><td>".$lastname."</td> 
+        echo "<tr><td>".$firstname."</td><td>".$lastname."</td>
         <td>".$email."</td><td>".$gender."</td></tr>";
     
     }

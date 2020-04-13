@@ -4,25 +4,6 @@ include('lib/header.php');
 
 //if user has already logged in
 if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
-
-   // echo "GOT HERE ?????";
-    
-    //Get the user designation
-  /*  $folder = scandir("db/users");
-    $countUsers = count($folder);
-
-    for($counter = 0; $counter < $countUsers; $counter++){
-        
-        $getfile = file_get_contents("db/users/". $folder[$counter]);
-        $toJson = json_decode($getfile);
-        $email = $toJson -> email;
-        if($_SESSION['loggedIn'] == $email){
-
-            $designation = $toJson -> designation;
-            $_SESSION['userlevel'] = $designation;
-        }
-    } */
-    //redirect to dashboard
     header("location: dashboard.php");
 }
 
@@ -91,6 +72,9 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
     <Label>Designation</Label><br>
     <select name="designation">
         <option>Select</option>
+        <option <?php if(isset($_SESSION['designation']) && isset($_SESSION['designation']) == "Super Admin") 
+        echo "selected"; 
+        ?> >Super Admin</option>
         <option <?php if(isset($_SESSION['designation']) && isset($_SESSION['designation']) == "Medical Team") 
         echo "selected"; 
         ?> >Medical Team</option>

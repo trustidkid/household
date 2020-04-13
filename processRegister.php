@@ -59,7 +59,7 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
     $allUsers = scandir($directory);
     $newUser  = (count($allUsers)-2) +1; //removes the leading two empty files in the directory
 
-    $dateRegister = date('d-m-yy H:i:s');
+    $dateRegister =date('d-m-yy H:i:s');
 
 
     //create a json object
@@ -87,16 +87,16 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
             header("location: register.php");
             //terminate the loop
             die();
-
         }
     }
 
+    //echo "got here";
     file_put_contents("db/users/".$email.".json", json_encode($userObject));
     //file_put_contents("db/userlog/".$username.".json", json_encode($loginobject));
 
     $_SESSION['message'] = "Registration was successful, you can now login! ". $firstname;
     //redirect
-    header('location: login.php');
+    //header('location: login.php');
     
    }
 

@@ -46,8 +46,13 @@ if( $counterror > 0){
             $dateregister = $userObject -> date;
             $passwordfromUser = password_verify($password,$passwordfromDb);
 
-            if($passwordfromDb == $passwordfromUser){
+            if($passwordfromDb != $passwordfromUser){
+                $_SESSION['error'] = "Either username or password is wrong";
+                    header('location: login.php');
+            }
+            else{
 
+                echo 'got here';
                 //retrieve the last login time
                 $alluserlogin = scandir("db/userlog/");
                 for($count = 0; $count < count($alluserlogin); $count++){
@@ -60,14 +65,14 @@ if( $counterror > 0){
                     }
             
                 }
-
+                //update user login time
                 $loginobject = [
                     'email' => $username,
                     'logintime' => $logintime,
                 ];
                 
+                //save user login time
                 file_put_contents("db/userlog/".$username.".json", json_encode($loginobject));
-            
                 //save parameters in a session
                 $_SESSION['loggedIn'] = $username;
                 $_SESSION['department']= $userDept;
@@ -77,19 +82,19 @@ if( $counterror > 0){
                 $_SESSION['logintime'] = $logintime;
                 //$_SESSION['superadmin']= "admin";
 
-                header("location: dashboard.php");
-
-                //redirect to dashboard
-               /* $_SESSION['loggedIn'] = "You are welcome " . $username . 
-                "<span style='color: black'><p> Login Time:  
-                ". $logintime ."</p></span>";
-                header("location: login.php"); */
-            }else{
-                $_SESSION['error'] = "Either username or password is wrong";
-                header('location: login.php');
+                //redirect user to respective page
+                if($userlevel == "Super Admin"){
+                    header("location: dashboard.php");
+                }
+                else if($userlevel == "Medical Team (TM)"){
+                    header("location: medicalteam.php");
+                }else{
+                    header("location: patient.php");
+                }
             }
+            //echo 'got here now';
         }
-   } 
+   }
 }
 
 
