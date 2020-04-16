@@ -42,6 +42,7 @@ if( $counterror > 0){
             $userString = file_get_contents("db/users/". $currentuser);
             $userObject = json_decode($userString);
             $passwordfromDb = $userObject -> password;
+            $firstname = $userObject -> firstname;
             $userlevel = $userObject -> designation;
             $userDept = $userObject -> department;
             $dateregister = $userObject -> date;
@@ -59,10 +60,15 @@ if( $counterror > 0){
                 for($count = 0; $count < count($alluserlogin); $count++){
                     $currentuser = $alluserlogin[$count];
                     if($currentuser = $username.".json"){
+                       // echo $currentuser;
+                       // die();
             
                         $loginString = file_get_contents("db/userlog/".$currentuser);
                         $loginObject = json_decode($loginString);
                         $lastlogintime = $loginObject -> logintime;
+                        if(!$lastlogintime){
+                            $lastlogintime = "First Timer";
+                        }
                     }
             
                 }
@@ -76,6 +82,7 @@ if( $counterror > 0){
                 file_put_contents("db/userlog/".$username.".json", json_encode($loginobject));
                 //save parameters in a session
                 $_SESSION['loggedIn'] = $username;
+                $_SESSION['firstname'] = $firstname;
                 $_SESSION['email'] = $username;
                 $_SESSION['department']= $userDept;
                 $_SESSION['userlevel'] = $userlevel;
@@ -88,7 +95,7 @@ if( $counterror > 0){
                 if($userlevel == "Super Admin"){
                     header("location: dashboard.php");
                 }
-                else if($userlevel == "Medical Team (TM)"){
+                else if($userlevel == "Medical Team"){
                     header("location: medicalteam.php");
                 }else{
                     header("location: patient.php");

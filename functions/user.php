@@ -60,4 +60,49 @@
     function updateRecord($userObject){
 
     }
+
+    //TODO: To add boostrap to the dashboard.
+    //To display initial user data on the dashboard
+    function dashboard($role = ""){
+        if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
+    
+            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome: ". $_SESSION['firstname']. "</span>"."</p>".
+            "<hr style='border: 2px solid'>";
+        
+            echo "<div class='card bg-info text-white'>";
+            echo "<div class='card-header'><strong>Record Book</strong></div>";
+            echo "<div class='card-body'>Time In:- " . $_SESSION['logintime']. "</div>
+            <hr>
+            <div class='card-body'>Role:- ".$_SESSION['userlevel']."</div>
+            <hr>
+            <div class='card-body'>Department:- ".$_SESSION['department']."</div>
+            <hr>
+            <div class='card-body'>Date Register:- ".$_SESSION['dateregister']."</div>
+            <hr>
+            <div class='card-body'>Last Login Time:- ".$_SESSION['lastlogin']."</div>
+            <hr>
+          </div>";
+        
+        }
+        return false;
+    }
+
+    function checkUserRole(){
+        if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
+            //check user role
+            
+            if($_SESSION['userlevel']=='Patient'){
+                header("location: patient.php");
+                die();
+            }
+            if($_SESSION['userlevel']=='Medical Team'){
+                header("location: medicalteam.php");
+                die();
+            }
+            
+            
+        }
+    }
+
+    return false;
 ?>

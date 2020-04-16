@@ -1,10 +1,10 @@
 <?php
-    include('lib/header.php'); 
+    include('lib/header.php');
+    require_once('functions/user.php');
+    require_once('functions/alert.php');
 
-    echo "This is Medicat Team Page"
+    dashboard("Medical Team");
 ?>
 <p>
-<img src="" alt="appointimg" width="" height=""/>
-<a href="bookappointment.php">Book Appointment</a>
 
 </p>

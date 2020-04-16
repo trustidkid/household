@@ -30,15 +30,17 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <?php 
-          if(isset($_SESSION['userlevel']) == "Super Admin"){
-           echo "<li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a></li>";
-        }
 
         //if no user is login show register and login link
         if(!isset($_SESSION['loggedIn'])){
-           echo "<li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a></li>";
            echo " <li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
-        }else {
+           echo "<li><a href='forgot.php'><span class='glyphicon glyphicon-user'></span> Forgot Password</a></li>";
+        }else if(isset($_SESSION['userlevel']) == "Super Admin"){
+          echo "<li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a></li>";
+          echo "<li><a href='reset.php'><span class='glyphicon glyphicon-user'></span> Reset Password</a></li>";
+          echo " <li><a href='logout.php'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>";
+       }
+        else {
             echo "<li><a href='reset.php'><span class='glyphicon glyphicon-user'></span> Reset Password</a></li>";
             echo " <li><a href='logout.php'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>";
         } ?>   

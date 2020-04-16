@@ -1,12 +1,11 @@
 <?php 
 include('lib/header.php'); 
 include('functions/alert.php');
+include('functions/user.php');
 
 //TODO: TO CHECK SESSION MANAGEMENT THAT LOGS OUT USER AFTER 2 CLICKS ON A LINK
 //if user has already logged in
-if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
-    header("location: dashboard.php");
-}
+checkUserRole();
 
 ?>
 <p>

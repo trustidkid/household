@@ -1,31 +1,15 @@
 <?php 
     include('lib/header.php');
+
+    require_once('functions/user.php');
 ?>
 
 <p>
 <h3>Dashboard</h3>
 
-<? if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == 'Super Admin'){
-    
-    echo "<p>" ."<span style='color: green' >". "You are welcome: ". $_SESSION['loggedIn']. "</span>"."</p>".
-    "<p>"."<a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a>"."</p"."<p>".
-    "<hr style='border: 2px solid'>"."<p>";
-
-    echo "<div class='card bg-info text-white'>";
-    echo "<div class='card-header'><strong>Record Book</strong></div>";
-    echo "<div class='card-body'>Time In:- " . $_SESSION['logintime']. "</div>
-    <hr>
-    <div class='card-body'>Role:- ".$_SESSION['userlevel']."</div>
-    <hr>
-    <div class='card-body'>Department:- ".$_SESSION['department']."</div>
-    <hr>
-    <div class='card-body'>Date Register:- ".$_SESSION['dateregister']."</div>
-    <hr>
-    <div class='card-body'>Last Login Time:- ".$_SESSION['lastlogin']."</div>
-    <hr>
-  </div>";
-
-}
+<? 
+//add dashboard data;
+dashboard('Super Admin');
 
 $userlist = scandir("db/users/");
 //$email = $_SESSION['loggedIn'];
