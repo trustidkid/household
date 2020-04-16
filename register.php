@@ -1,7 +1,8 @@
 <?php 
 include('lib/header.php'); 
+include('functions/alert.php');
 
-
+//TODO: TO CHECK SESSION MANAGEMENT THAT LOGS OUT USER AFTER 2 CLICKS ON A LINK
 //if user has already logged in
 if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
     header("location: dashboard.php");
@@ -15,21 +16,17 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 <form method="POST" action="processRegister.php">
 
 <?php
-    if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
-    echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
-    session_unset();
-}
- ?>
+   print_alert();
+?>
 
 <p>
     <label for="firstname">First Name</label><br>
     <input 
     <?php
-    if(isset($_SESSION['firstname'] ) && !empty(isset($_SESSION['firstname']))){
-    echo "value=" . $_SESSION['firstname'] . "</span>";
-    session_unset();
-}
- ?>
+        if(isset($_SESSION['firstname'] ) && !empty(isset($_SESSION['firstname']))){
+        echo "value=" . $_SESSION['firstname'];
+    }
+    ?>
     
     type="text" name="firstname"  placeholder="First Name">
 </p>
@@ -88,7 +85,6 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
     <label for="department">Department</label><br>
     <input type="text" name="department" value="<?php if(isset($_SESSION['department'])){
         echo $_SESSION['department'];
-        session_destroy();
     }
 ?>" placeholder="Department">
 </p>

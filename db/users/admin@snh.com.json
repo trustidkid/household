@@ -1,1 +1,1 @@
-{ "id": 6, "firstname": "ola", "lastname": "ade", "email": "admin@snh", "password": "$2y$10$5JXAFngVu7alO9lGCLgnZurPKKt6be9gV.vbF6ZjCajbnxm4zR6Dq", "gender": "Male", "designation": "admin", "department": "admin", "date": "06-04-2020 03:06:14" }
+{"id":6,"firstname":"ola","lastname":"ade","email":"admin@snh","password":"$2y$10$zmSNtwoN845j9QaoqISf5Oiv.fBqz5iQTP.U3N3s7ecJ9qAXo6aqK","gender":"Male","designation":"admin","department":"admin","date":"06-04-2020 03:06:14"}

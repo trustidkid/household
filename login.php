@@ -1,5 +1,7 @@
 <?php 
 include('lib/header.php'); 
+require_once('functions/alert.php');
+require_once('functions/user.php');
 
 //if user has already logged in
 if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
@@ -10,23 +12,12 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 
 <p>
     <?php
-        if(isset($_SESSION['message'] ) && !empty(isset($_SESSION['message']))){
-        echo "<span style='color: green' >" . $_SESSION['message'] . "</span>";
-        session_destroy();
-    }
+        print_alert();
     ?>
-
- </p>
+</p>
 <p>Login Page</p>
 
 <form method="POST" action="processLogin.php">
-
-<?php
-    if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
-    echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
-   session_unset();
-}
- ?>
 
 <p>
     <label for="email">Email</label><br>
@@ -36,9 +27,7 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 </p>
 <p>
     <label for="email">Password</label><br>
-    <input 
-        <?php if(isset($_SESSION['password']) && !empty(isset($_SESSION['password']))) echo "value=".$_SESSION['password']; ?>
-     type="password" name="password" placeholder="Password" require>
+    <input type="password" name="password" placeholder="Password" require>
 </p>
 
 <p>
@@ -48,6 +37,5 @@ if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 <p><a href="forgot.php">Forgot Password</a></p>
     
 </form>
-
 
 <?php include('lib/footer.php'); ?>

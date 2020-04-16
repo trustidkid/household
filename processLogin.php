@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 //print_r($_POST);
 $counterror = 0;
 $username = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
@@ -75,6 +76,7 @@ if( $counterror > 0){
                 file_put_contents("db/userlog/".$username.".json", json_encode($loginobject));
                 //save parameters in a session
                 $_SESSION['loggedIn'] = $username;
+                $_SESSION['email'] = $username;
                 $_SESSION['department']= $userDept;
                 $_SESSION['userlevel'] = $userlevel;
                 $_SESSION['dateregister'] = $dateregister;

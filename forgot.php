@@ -14,9 +14,11 @@
 
 <p>
     <label for="email">Email</label><br>
-    <input type="email" name="email" require value="<?php if(isset($_SESSION['email'])){
-        echo $_SESSION['email'];
-    } ?>" placeholder="Email">
+    <input 
+    <?php if(isset($_SESSION['loggedIn'])){
+        echo "value=". $_SESSION['loggedIn'];
+    } ?>
+    type="email" name="email" require  placeholder="Email">
 </p>
 
 <p>

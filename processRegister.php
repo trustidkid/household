@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+
+require_once('functions/user.php');
+
    $errorcount = 0;
 
    //if first name is empty increment errorcunt variable
@@ -16,18 +19,21 @@ session_start();
 
    //check name contains number
    if(preg_match('~[0-9]~',$firstname) || preg_match('~[0-9]~',$lastname) || $firstname =="" || $lastname==""){
-    $_SESSION['error'] = "Name cannot be blank or shouldn't have number";
+    $content = "Name cannot be blank or shouldn't have number";
+    set_alert("error", $content);
     header('location: register.php');
     die();
 }
 if(strlen($lastname) < 2 || strlen($firstname) < 2)  {
-    $_SESSION['error'] = "Provided name is too short";
+    $content = "Provided name is too short";
+    set_alert("error", $content);
     header('location: register.php');
     die();
 }
 
 if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
-    $_SESSION['error'] = "Email cannot be less than 5 characters and/or not a valid email";
+    $content = "Email cannot be less than 5 characters and/or not a valid email";
+    set_alert("error", $content);
     header('location: register.php');
     die();
 }
@@ -43,8 +49,9 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
 
    if( $errorcount > 0 ){
        //redirect back to register page
-
-       $_SESSION['error'] = "You have " . $errorcount . " error";
+       // $content = "You have " . $errorcount . " error";
+       // set_alert("error", $content);
+        $_SESSION['error'] = "You have " . $errorcount . " error";
 
        if($errorcount > 1) $_SESSION['error'] .= "s";
    
@@ -54,7 +61,6 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
     //save to a file
 
     //auto generate ID
-
     $directory = "db/users";
     $allUsers = scandir($directory);
     $newUser  = (count($allUsers)-2) +1; //removes the leading two empty files in the directory
@@ -78,25 +84,23 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
     $_SESSION['user']= $userObject;
 
     //check user exist
-    for($counter =0; $counter < count($allUsers); $counter++){
+    $userExists = findUser($email);
+    
+    if($userExists){
 
-        //check for email
-        if($allUsers[$counter] == $email.".json"){
-
-            $_SESSION['error'] = "Registration failed. User already exist";
-            header("location: register.php");
-            //terminate the loop
-            die();
-        }
+        $content = "Registration failed. User already exist";
+        set_alert("error", $content);
+        header("location: register.php");
+        //terminate
+        die();
     }
-
-    //echo "got here";
-    file_put_contents("db/users/".$email.".json", json_encode($userObject));
-    //file_put_contents("db/userlog/".$username.".json", json_encode($loginobject));
-
-    $_SESSION['message'] = "Registration was successful, you can now login! ". $firstname;
+    
+    //save user
+    saveUser($userObject);
+    $content = "Registration was successful, you can now login! ". $firstname;
+    set_alert("message",$content);
     //redirect
-    //header('location: login.php');
+    header('location: login.php');
     
    }
 

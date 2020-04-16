@@ -13,10 +13,7 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
 <form method="POST" action="processRegister.php">
 
 <?php
-    if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
-    echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
-    session_unset();
-}
+    print_alert();
  ?>
 
 <p>
