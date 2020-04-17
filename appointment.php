@@ -4,9 +4,10 @@ include('functions/alert.php');
 include('functions/user.php');
 
 //if user has already logged in
-//checkUserRole();
 if(!isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
     header("location: login.php");
+}else{
+    header("location: appointment.php");
 }
 
 ?>
@@ -18,22 +19,14 @@ if(!isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
 
 <?php
    print_alert();
-
-   /*
-   Date of appointment
-Time of appointment
-Nature of appointment
-Initial complaint
-Department they want to book the appointment for
-   */
 ?>
 
 <p>
     <label for="date">Appointment Date</label><br>
     <input 
     <?php
-        if(isset($_SESSION['date'] ) && !empty(isset($_SESSION['date']))){
-        echo "value=" . $_SESSION['date'];
+        if(isset($_SESSION['date'] ) && !empty(isset($_SESSION['appointmentdate']))){
+        echo "value=" . $_SESSION['appointmentdate'];
     }
     ?>
     
@@ -41,15 +34,15 @@ Department they want to book the appointment for
 </p>
 <p>
     <label for="time">Appointment Time</label><br>
-    <input type="text" name="time" value="<?php if(isset($_SESSION['time'])){
+    <input type="text" name="appointmenttime" value="<?php if(isset($_SESSION['time'])){
         echo $_SESSION['time'];
         
     } ?>" placeholder="Appointment Time">
 </p>
 <p>
     <label for="nature">Nature of Appointment</label><br>
-    <input type="text" name="nature_of_appointment" value="<?php if(isset($_SESSION['nature'])){
-        echo $_SESSION['nature'];
+    <input type="text" name="nature_of_appointment" value="<?php if(isset($_SESSION['nature_of_appointment'])){
+        echo $_SESSION['nature_of_appointment'];
         
     } ?>" placeholder="Nature of Appointment">
 </p>
@@ -62,7 +55,7 @@ Department they want to book the appointment for
 </p>
 <p>
     <label for="intial complaint"></label>
-    <<textarea rows="4" cols="20" name="complaint" placeholder="Write initial complaint here"></textarea>
+    <textarea rows="4" cols="20" name="complaint" placeholder="Write initial complaint here"></textarea>
 </p>
 
 <p>

@@ -29,6 +29,28 @@
         }
     }
 
+    function findAppointment($mail= ""){
+        if(!$email){
+            set_alert("error", "User email not found");
+            die();
+        }
+
+        $allappointment = scandir("db/appointment/");
+        
+        for($counter = 0; $counter < count($allappointment); $counter++){
+            $currentuser = $email.".json";
+            //check for email
+            if($allappointment[$counter] == $currentuser){
+
+                $String = file_get_contents("db/appointment/". $currentuser);
+                $userObject = json_decode($userString);
+
+                return $userObject;
+            }
+        }
+        return false;
+    }
+
     function findUser($email = ""){
 
         if(!$email){
@@ -66,7 +88,7 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome: ". $_SESSION['firstname']. "</span>"."</p>".
+            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome: ". $_SESSION['loggedIn']. "</span>"."</p>".
             "<hr style='border: 2px solid'>";
         
             echo "<div class='card bg-info text-white'>";

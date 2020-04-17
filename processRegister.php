@@ -3,6 +3,7 @@
 session_start();
 
 require_once('functions/user.php');
+require_once('functions/alert.php');
 
    $errorcount = 0;
 
@@ -41,7 +42,6 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
    $_SESSION['firstname'] = $firstname;
    $_SESSION['lastname'] = $lastname;
    $_SESSION['email'] = $email;
-  // $_SESSION['password'] = $password;
    $_SESSION['gender'] = $gender;
    $_SESSION['designation'] = $designation;
    $_SESSION['department'] = $department;

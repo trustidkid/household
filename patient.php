@@ -5,9 +5,17 @@
 ?>
 <?php
 
-//add dashboard data
-dashboard('Patient');
+print_alert();
 
-echo "<div><a href='appointment.php'>Book Appointment</a></div <br>". "<div><a href='paybill.php'>Pay Bill</a></div";
+dashboard('Patient');
+if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
+
+  $_SESSION['email'] = $_SESSION['loggedIn'];
+
+  echo "<div><a href='appointment.php'>Book Appointment</a></div <br>". "<div><a href='paybill.php'>Pay Bill</a></div";
+
+}else{
+    header("location: login.php");
+}
 
 ?>
