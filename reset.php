@@ -33,8 +33,6 @@ require_once('functions/alert.php');
     <? 
         if(is_token_set_session()){
             echo "value= '".$_SESSION['token']."'";
-        }if(is_user_loggedIn()){
-            echo "value= "."";
         }else{
             echo "value= '".$_GET['token']."'";
         }

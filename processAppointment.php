@@ -21,18 +21,14 @@ require_once('functions/alert.php');
    $_SESSION['complaint'] = $complaint;
    $_SESSION['department'] = $department;
 
-   $email = $_SESSION['email'];
+  
    if(isset($_SESSION['loggedIn'])){
-        $email ="you are here";
+        $email = $_SESSION['loggedIn'];
     }
 
-    //echo $email;
-    //die();
+   
 
    if( $errorcount > 0 ){
-       //redirect back to register page
-       // $content = "You have " . $errorcount . " error";
-       // set_alert("error", $content);
         $_SESSION['error'] = "You have " . $errorcount . " error";
 
        if($errorcount > 1) $_SESSION['error'] .= "s";
@@ -41,17 +37,19 @@ require_once('functions/alert.php');
        header('Location: appointment.php');
    }else{
 
-    //auto generate ID
+    //generate appointment ID
     $directory = "db/appointment";
     $allUsers = scandir($directory);
-    $newAppointment  = (count($allUsers)-2) +1; //removes the leading two empty files in the directory
+    $newAppointmentID = (count($allUsers)-2) +1; //removes the leading two empty files in the directory
 
     $dateRegister =date('d-m-yy H:i:s');
+    $filename = "ap_".$newAppointmentID;
 
 
     //create a json object
     $appointmentObject = [
-        'id'=>$newAppointment,
+        'id'=>$newAppointmentID,
+        'email' => $email,
         'appointmentdate'=>$appointmentdate,
         'appointmenttime'=> $appointmenttime,
         'nature_of_appointment'=>$nature_of_appointment,
@@ -59,12 +57,14 @@ require_once('functions/alert.php');
         'department' => $department,
         'date' => $dateRegister
     ];
-
-    //check that has not been booked before
-    $appointmentExists = findAppointment($email);
+    //echo "got here the  is ". $email;
+    //die();
+    //check that user has not book appointment same day before
+    $appointmentExists = findAppointment($email,$department,$appointmentdate);
+    //echo $appointmentExists;
+    //die();
     
     if($appointmentExists){
-
         $content = "Registration failed. appointment already exist";
         set_alert("error", $content);
         header("location: appointment.php");
@@ -72,14 +72,22 @@ require_once('functions/alert.php');
         die();
     }
     
-    //save user
-    //saveUser($userObject);
-    file_put_contents("db/appointment/".$email.".json",json_encode($appointmentObject));
-
-    $content = "Thank you for contacting us! Please wait for your turn! ";
-    set_alert("message",$content);
-    //redirect
-    header('location: patient.php');
+    //TODO: To ensure patient can save multiple records with same name
+    //save user 
+    //saveAppointment($filename,$appointmentObject);
+    $save = file_put_contents("db/appointment/".$filename.".json",json_encode($appointmentObject));
+    //echo $save;
+    //die();
+    if ($save){
+        $content = "Thank you for contacting us! See you at the hospital.";
+        set_alert("message",$content);
+        //redirect
+        header('location: appointment.php');
+        die();
+    }
+    $content = "Something went wrong! We cannot save this appointment at this moment. Contact administrator";
+    set_alert("error",$content);
+    
    }
 
    

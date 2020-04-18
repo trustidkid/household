@@ -29,7 +29,7 @@
         }
     }
 
-    function findAppointment($mail= ""){
+    function findAppointment($email = "", $department, $appointmentdate ){
         if(!$email){
             set_alert("error", "User email not found");
             die();
@@ -37,16 +37,17 @@
 
         $allappointment = scandir("db/appointment/");
         
-        for($counter = 0; $counter < count($allappointment); $counter++){
-            $currentuser = $email.".json";
-            //check for email
-            if($allappointment[$counter] == $currentuser){
+        for($counter = 1; $counter <= count($allappointment); $counter++){
+            $filename = "ap_".$counter.".json";
+            $appointmentString = file_get_contents("db/appointment/". $filename);
+            $appointmentObject = json_decode($appointmentString);
+            $appointmentdatefromDb = $appointmentObject -> appointmentdate;
+            $departmentfromDb = $appointmentObject -> department;
+            $emailfromDb = $appointmentObject -> email;
 
-                $String = file_get_contents("db/appointment/". $currentuser);
-                $userObject = json_decode($userString);
-
-                return $userObject;
-            }
+            if($appointmentdatefromDb == $appointmentdate && $departmentfromDb == $department && $email == $emailfromDb){
+                return $appointmentObject;
+           }
         }
         return false;
     }
@@ -68,7 +69,7 @@
                 //compare user password with database
                 $userString = file_get_contents("db/users/". $currentuser);
                 $userObject = json_decode($userString);
-
+    
                 return $userObject;
             }
         }
@@ -76,7 +77,12 @@
     }
 
     function saveUser($userObject){
+
         file_put_contents("db/users/".$userObject['email'].".json", json_encode($userObject));
+    }
+
+    function saveAppointment($filename,$AppointmentObject){
+        file_put_contents("db/users/".$filename.".json", json_encode($AppointmentObject));
     }
 
     function updateRecord($userObject){
@@ -88,8 +94,8 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome: ". $_SESSION['loggedIn']. "</span>"."</p>".
-            "<hr style='border: 2px solid'>";
+            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome ". $_SESSION['firstname']. "</span>"."</p>".
+            "<hr style='border: 1px solid'>";
         
             echo "<div class='card bg-info text-white'>";
             echo "<div class='card-header'><strong>Record Book</strong></div>";
@@ -121,8 +127,7 @@
                 header("location: medicalteam.php");
                 die();
             }
-            
-            
+    
         }
     }
 

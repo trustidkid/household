@@ -81,8 +81,6 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
         'date' => $dateRegister
     ];
 
-    $_SESSION['user']= $userObject;
-
     //check user exist
     $userExists = findUser($email);
     
@@ -100,7 +98,7 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
     $content = "Registration was successful, you can now login! ". $firstname;
     set_alert("message",$content);
     //redirect
-    header('location: login.php');
+    header('location: register.php');
     
    }
 

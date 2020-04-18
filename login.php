@@ -4,7 +4,7 @@ require_once('functions/alert.php');
 require_once('functions/user.php');
 
 //if user has already logged in
-if(isset($_SESSION['loggedIn']) && empty(isset($_SESSION['loggedIn']))){
+if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
     //redirect to dashboard
     header("location: dashboard.php");
 }

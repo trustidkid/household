@@ -33,10 +33,6 @@ if( $counterror > 0){
 
     for($counter = 0; $counter < count($tokenDirectory); $counter++){
         $currentuser = $email.".json";
-       
-        //echo $currentuser;
-       // echo $tokenDirectory[$counter];
-       /// die();
 
         //confirm the email
         if($tokenDirectory[$counter] == $currentuser){
@@ -77,11 +73,7 @@ if( $counterror > 0){
 
                         //save the updated user data to the database
                         file_put_contents("db/users/".$email.".json",json_encode($userObject));
-                        //saveUser($userObject);
-
-                        $content = "Password reset successful. You can now login.";
-                        set_alert("message",$content);
-                        
+                        //saveUser($userObject);                        
 
                         /**
                          * Inform user that was reset was successful
@@ -100,19 +92,24 @@ if( $counterror > 0){
 
                         $try = mail($to,$subject,$message,$headers);
 
+                        $content = "Password reset successful. You can now login.";
+                        set_alert("message",$content);
                         header("location: login.php");
                     }
             
                 }
-                die();
+           //    die();
             
             }
+            $content = "Invalid token or expired.";
+            set_alert("error",$content);
+            header("location: reset.php");
         }       
 
-        $content = "Password reset failed, token/email invalid or expired.";
-        set_alert("error",$content);
-        header("location: login.php");
-
     }
+    //email not not exist
+    $content = "Email did not exist";
+    set_alert("error",$content);
+    header("location: reset.php");
     
 }
