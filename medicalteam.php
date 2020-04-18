@@ -8,25 +8,26 @@
     $appointmentlist = scandir("db/appointment/");
     $userlist = scandir("db/users/");
 
-echo "<p> <table style='width='100%'; border= 1px solid #dddddd;
-text-align=left; background-color= #dddddd;'> 
+echo "<p> <table style='width='100%'; padding:10px; border= 1px solid #dddddd;
+text-align=center; background-color= #dddddd;'> 
     <caption>Appointment Lists</caption>
     <tr><th>Full Name</th>
     <th>Appointment Date</th>
     <th>Nature of Appointment</th>
     <th>Initial Complaint</th>
     <th>Department</th>
+    <th>Register Date</th>
     <th>Preview</th>
     </tr>";
 
-    $currentUser = $_SESSION['loggedIn'];
-    //get Doctor department
+    $doctorEmail = $_SESSION['loggedIn'].".json";
+    //Search for Doctor's department
     for($i =2; $i < count($userlist); $i++){
         
-        if($currentUser == $userlist[$i].".json"){
+        if($doctorEmail == $userlist[$i]){
             $doctorString = file_get_contents("db/users/". $userlist[$i]);
             $doctorObject = json_decode($doctorString);
-            $doctordepartment = $appointmentObject -> department;
+            $doctordepartment = $doctorObject -> department;
 
             for($count=2; $count < count($appointmentlist); $count++){
 
@@ -39,24 +40,33 @@ text-align=left; background-color= #dddddd;'>
 
                 //chechk if department patient have appointment with is the same as doctor department
                 if($doctordepartment == $appointmentdepartment){
+
                     $appointmentdate = $appointmentObject -> appointmentdate;
                     $appointmenttime = $appointmentObject -> appointmenttime;
                     $nature_of_appointment = $appointmentObject -> nature_of_appointment;
                     $complaint = $appointmentObject -> complaint;
                     $dateRegister = $appointmentObject -> date;
+                    $email = $appointmentObject -> email;
                     
                     //get patient data from user table
-                    $patientString = file_get_contents("db/users/".$appointmentlist[$i]);
+                    $patientString = file_get_contents("db/users/".$email.".json");
                     $patientObject = json_decode($patientString);
-                    $fullname = $patientObject -> firstname ;
+                    $firstname = $patientObject -> firstname ;
                     $lastname = $patientObject -> lastname;
                     $email = $patientObject -> email;
+                    $gender = $patientObject -> gender;
+                    $department = $patientObject -> department;
+                    $designation = $patientObject -> designation;
+
 
                     $_SESSION['patientemail'] = $email;
-
+                    $_SESSION['gender'] = $gender;
+                    $_SESSION['fullname'] = $firstname." ".$lastname;
+                    $_SESSION['department'] = $department;
+                    $_SESSION['designation'] = $designation;
                 }
             }
-
+            
         echo "<tr>
             <td>".$firstname." ".$lastname."</td>
             <td>".$appointmentdate. " ".$appointmenttime."</td>
@@ -66,12 +76,13 @@ text-align=left; background-color= #dddddd;'>
             <td>".$dateRegister."</td>
             <td><a href='patientview.php'>"."View"."</a>.</td>".
             "</tr>";
+            die();
+        }
+    
     }
-}
+    echo "</table> </p>";
+    echo "<strong>You have no pending appointments!</strong>";
 
-
-echo "</table> </p>";
-echo "<strong>You have no pending appointments!</strong>";
 
 ?>
 <p>

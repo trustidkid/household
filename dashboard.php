@@ -30,7 +30,7 @@ for($count=2; $count < count($userlist); $count++){
     //echo "<p> file name". $userlist[$count]. "</p>";
     $staffObject = json_decode($staff);
     //TODO: To seperate staff from patient on the list
-    $designation = $staffObject -> designation; 
+    $designation = $staffObject -> designation;
 
    if($designation == "Medical Team" || $designation == "Patient"){
         $firstname = $staffObject -> firstname;

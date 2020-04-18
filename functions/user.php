@@ -94,7 +94,7 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome ". $_SESSION['firstname']. "</span>"."</p>".
+            echo "<p>" ."<span style='color: green; font-size:24px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>".
             "<hr style='border: 1px solid'>";
         
             echo "<div class='card bg-info text-white'>";

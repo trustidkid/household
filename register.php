@@ -31,14 +31,14 @@ checkUserRole();
 </p>
 <p>
     <label for="lastname">Last Name</label><br>
-    <input type="text" name="lastname" value="<?php if(isset($_SESSION['lastname'])){
+    <input type="text" name="lastname" value="<?php if(!empty(isset($_SESSION['lastname']))){
         echo $_SESSION['lastname'];
         
     } ?>" placeholder="Last Name">
 </p>
 <p>
     <label for="email">Email</label><br>
-    <input type="email" name="email" value="<?php if(isset($_SESSION['email'])){
+    <input type="email" name="email" value="<?php if(!empty(isset($_SESSION['email']))){
         echo $_SESSION['email'];
         
     } ?>" placeholder="Email">
@@ -51,11 +51,11 @@ checkUserRole();
     <label for="email">Gender</label><br>
     <select name="gender">
         <option>Select</option>
-        <option <?php if(isset($_SESSION['gender']) && isset($_SESSION['gender'])== "Female"){
+        <option <?php if(!empty(isset($_SESSION['gender'])) && isset($_SESSION['gender'])== "Female"){
             echo "selected";
             
         } ?> >Female</option>
-        <option <?php if(isset($_SESSION['gender']) && isset($_SESSION['gender'])== "Male"){
+        <option <?php if(!empty(isset($_SESSION['gender'])) && isset($_SESSION['gender'])== "Male"){
             echo "selected";
             
         } ?>
@@ -68,13 +68,13 @@ checkUserRole();
     <Label>Designation</Label><br>
     <select name="designation">
         <option>Select</option>
-        <option <?php if(isset($_SESSION['designation']) && isset($_SESSION['designation']) == "Super Admin") 
+        <option <?php if(!empty(isset($_SESSION['designation'])) && isset($_SESSION['designation']) == "Super Admin") 
         echo "selected"; 
         ?> >Super Admin</option>
-        <option <?php if(isset($_SESSION['designation']) && isset($_SESSION['designation']) == "Medical Team") 
+        <option <?php if(!empty(isset($_SESSION['designation'])) && isset($_SESSION['designation']) == "Medical Team") 
         echo "selected"; 
         ?> >Medical Team</option>
-        <option <?php if(isset($_SESSION['designation']) && isset($_SESSION['designation']) == "Patient") 
+        <option <?php if(!empty(isset($_SESSION['designation'])) && isset($_SESSION['designation']) == "Patient") 
         echo "selected"; 
          ?>>Patient</option>
     </select>
@@ -82,7 +82,7 @@ checkUserRole();
 
 <p>
     <label for="department">Department</label><br>
-    <input type="text" name="department" value="<?php if(isset($_SESSION['department'])){
+    <input type="text" name="department" value="<?php if(!empty(isset($_SESSION['department']))){
         echo $_SESSION['department'];
     }
 ?>" placeholder="Department">
