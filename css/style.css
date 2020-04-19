@@ -9,7 +9,7 @@ body {
 
 input[type=text],
 input[type=password] {
-    width: 100%;
+    width: 35%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -21,13 +21,13 @@ input[type=password] {
 /* Set a style for all buttons */
 
 button {
-    background-color: #4CAF50;
+    background-color: #f9aa33;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 35%;
 }
 
 button:hover {
@@ -58,7 +58,7 @@ img.avatar {
 }
 
 .container {
-    padding: 16px;
+    padding: 10px;
 }
 
 span.psw {
@@ -99,7 +99,7 @@ span.psw {
     margin: 5% auto 15% auto;
     /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
     /* Could be more or less, depending on screen size */
 }
 

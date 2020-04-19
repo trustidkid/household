@@ -8,13 +8,17 @@
 
 print_alert();
 pageTitle("Patient Corner");
+
 dashboard('Patient');
+echo "<p>
+</p>";
 
 if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
 
-  $_SESSION['email'] = $_SESSION['loggedIn'];
-
-  echo "<div><a href='appointment.php'>Book Appointment</a></div <br>". "<div><a href='paybill.php'>Pay Bill</a></div";
+  echo "<div style='margin-left:10%; display:block; width: 200px; background-color: #f9aa33;'>
+          <a href='appointment.php'>Book Appointment</a>
+        </div"."||||".
+      "<div style='margin-right:40%'><a href='paybill.php'>Pay Bill</a></div";
 
 }else{
     header("location: login.php");

@@ -4,6 +4,30 @@ session_start();
 require_once('functions/user.php');
 require_once('functions/alert.php');
 
+/**
+ * PHPMAILER SETUP START
+ */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+//require "user/composer/autoload_real.php";
+//require "/usr/local/bin/composer/autoload.php";
+require_once 'vendor/autoload.php';
+
+$mail = new PHPMailer();
+
+$mail->isSMTP();
+$mail->Host = 'smtp.mailtrap.io';
+$mail->SMTPAuth = true;
+$mail->Username = '854743967f9a4e'; 
+$mail->Password = 'b0306ceb161ca1';
+$mail->SMTPSecure = 'tls';
+$mail->Port = 2525;
+
+/**
+ * PHPMAILER SETUP END
+ */
+
 //print_r($_POST);
 $counterror = 0;
 $email = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
@@ -80,7 +104,7 @@ if( $counterror > 0){
                          */
 
                          //send mail to
-                        $to = $username;
+                       
                         $subject = "Password Reset Successful";
                         $message = "Your password has been reset successfully. If this was not initiated from you. Please goto snh.org and reset the password.";
                         $headers = "From: no-reply@snh.com" . "\r\n" .
@@ -90,15 +114,35 @@ if( $counterror > 0){
                         //delete token
                         //unlink("db/token".$email);
 
-                        $try = mail($to,$subject,$message,$headers);
+                        //$to = $username;
+                        $subject = "Password Reset Successful";
+                        $message = "You password reset request was successful.";
+                        $message .= "If this was not you please visit http://localhost:8080/household/forgot.php to reset your password";
+                        //$headers = "From: yemi.bili@gmail.com" . "\r\n" .
+                    // "CC: yemi.bili07@gmail.com";
 
-                        $content = "Password reset successful. You can now login.";
-                        set_alert("message",$content);
-                        header("location: login.php");
+                        $mail->setFrom('no-reply@snh.com', 'SNH Hospital');
+                        $mail->addReplyTo('info@msnh.com', 'SNH');
+                        $mail->addAddress($email, 'user'); 
+                        $mail->addCC('yemi.bili07@gmail.com', 'client');
+                        $mail->Subject = $subject;
+                        $mail->isHTML(true);
+                        $mail->Body = $message;
+
+                        if($mail->send()){
+                            set_alert("message","Password reset was successful for account ".$email);
+                            header("location: login.php");
+                        }else{
+                            $content = "Something went wrong. We cannot proceed further. Please try again later ".$username;
+                            set_alert("error",$content);
+                            echo 'Mailer Error: ' . $mail->ErrorInfo;
+                            header("location: reset.php");
+                        }
+
+                        die();
                     }
             
                 }
-           //    die();
             
             }
             $content = "Invalid token or expired.";

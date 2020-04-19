@@ -82,10 +82,7 @@ checkUserRole();
 
 <p>
     <label for="department">Department</label><br>
-    <input type="text" name="department" value="<?php if(!empty(isset($_SESSION['department']))){
-        echo $_SESSION['department'];
-    }
-?>" placeholder="Department">
+    <input type="text" name="department"  placeholder="Department">
 </p>
 
 <p>

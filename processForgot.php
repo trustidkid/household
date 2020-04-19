@@ -6,7 +6,7 @@ require_once('functions/alert.php');
 require_once('functions/user.php');
 
 /**
- * PHP MAILER SETUP START
+ * PHPMAILER SETUP START
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,9 +26,9 @@ $mail->SMTPSecure = 'tls';
 $mail->Port = 2525;
 
 /**
- * PHP MAILER SETUP END
+ * PHPMAILER SETUP END
  */
-//print_r($_POST);
+
 $counterror = 0;
 $username = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
 
@@ -66,11 +66,9 @@ if( $counterror > 0){
               */
 
             //send mail to
-            
-            //$to = $username;
             $subject = "Password Reset Link";
             $message = "You initated a request to reset your account password.";
-            $message .= "If this was not from your please ignore. Otherwise, goto http://localhost:8080/household/resetpassword.php?token=".$token;
+            $message .= "If this was not from your please ignore. Otherwise, goto http://localhost:8080/household/reset.php?token=".$token;
             //$headers = "From: yemi.bili@gmail.com" . "\r\n" .
            // "CC: yemi.bili07@gmail.com";
 

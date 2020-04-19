@@ -94,21 +94,26 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<p>" ."<span style='color: green; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
-            echo "<div class='card bg-info text-white'>";
-            echo "<div class='card-header'><strong></strong></div>";
-            echo "<div class='card-body'>Time In:- " . $_SESSION['logintime']. "</div>
-            <hr>
-            <div class='card-body'>Role:- ".$_SESSION['userlevel']."</div>
-            <hr>
-            <div class='card-body'>Department:- ".$_SESSION['department']."</div>
-            <hr>
-            <div class='card-body'>Date Register:- ".$_SESSION['dateregister']."</div>
-            <hr>
-            <div class='card-body'>Last Login Time:- ".$_SESSION['lastlogin']."</div>
-            <hr>
-          </div>";
-        
+            echo "<p>" ."<span style='color: green; margin-left:10%; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
+            echo "<table align='center' vertical-align='center' style='width: 80%; 
+                    line-height='30px'; border= 1px solid #dddddd; text-align=left;'>
+
+                    <caption><h3>Basic Data</h3></caption>
+                    <tr style='background-color: #344955; color: white'>
+                        <th style='padding: 10px'>Login Time</th>
+                        <th style='padding: 10px'>Role</th>
+                        <th style='padding: 10px'>Department</th>
+                        <th style='padding: 10px'>Date Register</th>
+                        <th style='padding: 10px'>Last Login Time</th>
+                    </tr>
+                    <tr style='padding: 15px;'>
+                        <td style='padding: 10px'>".$_SESSION['logintime']."</th>
+                        <td style='padding: 10px'>".$_SESSION['userlevel']."</th>
+                        <td style='padding: 10px'>".$_SESSION['department']."/th>
+                        <td style='padding: 10px'>".$_SESSION['dateregister']."</th>
+                        <td style='padding: 10px'>".$_SESSION['lastlogin']."</th>
+                    </tr>
+                </table>";   
         }
         return false;
     }
@@ -131,12 +136,12 @@
 
     function pageTitle($title){
         echo "<p>
-             <h3>".$title."</h3>
+             <h3><span style='color:#344955; margin-left:10%'>".$title."</span></h3>
             <hr> 
         </p>";
     }
 
     function backButton($page){
-        echo "<a href='$page'><img src=''/><span style='color: grey'><strong>Back</strong></span></a>";
+        echo "<a href='$page'><img src=''/><span style='color: #f9aa33'><strong>Back</strong></span></a>";
     }
 ?>

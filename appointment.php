@@ -11,10 +11,10 @@ include('functions/user.php');
     }
 ?>
 <p>
-    <? pageTitle("Appointment Registeration"); ?>
+    <? pageTitle("Appointment Registration"); ?>
 </p>
 
-<form method="POST" action="processAppointment.php">
+<form method="POST" role="form" action="processAppointment.php">
 <p>
 <?php
    print_alert();
@@ -25,7 +25,7 @@ include('functions/user.php');
     <label for="date">Appointment Date</label><br>
     <input 
     <?php
-        if(isset($_SESSION['date'] ) && !empty(isset($_SESSION['appointmentdate']))){
+        if(isset($_SESSION['appointmentdate'] ) && !empty(isset($_SESSION['appointmentdate']))){
         echo "value=" . $_SESSION['appointmentdate'];
     }
     ?>
@@ -37,7 +37,7 @@ include('functions/user.php');
     <input type="text" name="appointmenttime" value="<?php if(isset($_SESSION['appointmenttime'])){
         echo $_SESSION['appointmenttime'];
         
-    } ?>" placeholder="Appointment Time">
+    } ?>" placeholder="16:40">
 </p>
 <p>
     <label for="nature">Nature of Appointment</label><br>
@@ -48,14 +48,11 @@ include('functions/user.php');
 </p>
 <p>
     <label for="department">Department</label><br>
-    <input type="text" name="department" value="<?php if(isset($_SESSION['department'])){
-        echo $_SESSION['department'];
-    }
-?>" placeholder="Department">
+    <input type="text" name="department" placeholder="Department">
 </p>
 <p>
     <label for="intial complaint"></label>
-    <textarea rows="4" cols="20" name="complaint" value="
+    <textarea rows="4" cols="67" name="complaint" value="
     <?php if(isset($_SESSION['complaint'])){
         echo $_SESSION['complaint'];
         
@@ -63,11 +60,14 @@ include('functions/user.php');
 </p>
 
 <p>
-    <button type="submit">Register</button> <button type="reset">Reset</button>
+    <button type="submit">Register</button> </p> <p><button type="reset">Reset</button>
 </p>
     
 </form>
 
-<
 
-<?php include('lib/footer.php'); ?>
+
+<?php
+backButton("patient.php");
+
+include('lib/footer.php'); ?>

@@ -11,17 +11,18 @@
     $appointmentlist = scandir("db/appointment/");
     $userlist = scandir("db/users/");
 
-echo "<p> <table style='width='100%'; padding:10px; border= 1px solid #dddddd;
-text-align=left; background-color= #dddddd;'> 
-    <caption>Appointment Lists</caption>
-    <tr><th>Full Name</th>
-    <th>Appointment Date</th>
-    <th>Nature of Appointment</th>
-    <th>Initial Complaint</th>
-    <th>Department</th>
-    <th>Register Date</th>
-    <th>Preview</th>
-    </tr>";
+    echo "<table align='center' vertical-align='center' style='width: 80%; 
+    line-height='30px'; border= 1px solid #dddddd; text-align=left;'>
+    <caption><h3>Appointment List</h3></caption>
+        <tr style='background-color: #344955; color: white'>
+            <th style='padding: 10px'>Full Name</th>
+            <th style='padding: 10px'>Appointment Date</th>
+            <th style='padding: 10px'>Nature of Appointment</th>
+            <th style='padding: 10px'>Initial Complaint</th>
+            <th style='padding: 10px'>Department</th>
+            <th style='padding: 10px'>Register Date</th>
+            <th style='padding: 10px'>Preview</th>
+        </tr>";
 
     $doctorEmail = $_SESSION['loggedIn'].".json";
     //Search for Doctor's department
@@ -69,20 +70,20 @@ text-align=left; background-color= #dddddd;'>
                     $_SESSION['designation'] = $designation;
 
                     echo "<tr>
-                    <td>".$firstname." ".$lastname."</td>
-                    <td>".$appointmentdate. " ".$appointmenttime."</td>
-                    <td>".$nature_of_appointment."</td>
-                    <td>".$complaint."</td>
-                    <td>".$doctordepartment."</td>
-                    <td>".$dateRegister."</td>
-                    <td><a href='patientview.php'>"."View"."</a>.</td>".
+                    <td style='padding: 10px'>".$firstname." ".$lastname."</td>
+                    <td style='padding: 10px'>".$appointmentdate. " ".$appointmenttime."</td>
+                    <td style='padding: 10px'>".$nature_of_appointment."</td>
+                    <td style='padding: 10px'>".$complaint."</td>
+                    <td style='padding: 10px'>".$doctordepartment."</td>
+                    <td style='padding: 10px'>".$dateRegister."</td>
+                    <td style='padding: 10px'><a href='patientview.php'>"."View"."</a>.</td>".
                     "</tr>";
                 }
             }
         }
     }
     echo "</table> </p>";
-    echo "<strong>You have no pending appointments!</strong>";
+    echo "<strong><span style='margin-left:10%'>You have no pending appointments!</span></strong>";
 
 
 ?>

@@ -1,6 +1,10 @@
 
 <p>
-Copywrite (c)2020
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
+</nav>
+
 <!-- <ul><a href="index.php">Home</a></ul>
             <a href="index.php">Home</a>
             <?php 

@@ -9,7 +9,7 @@ require_once('functions/alert.php');
 
    //if first name is empty increment errorcunt variable
    $appointmentdate = $_POST['appointmentdate'] !="" ? $_POST['appointmentdate'] : $errorcount++;
-   $appointmenttime = $_POST['appointmenttime'] != "" ? $_POST['appointmenttime'] : "last name empty";
+   $appointmenttime = $_POST['appointmenttime'] != "" ? $_POST['appointmenttime'] : $errorcount++;
    $nature_of_appointment = $_POST['nature_of_appointment'] != "" ? $_POST['nature_of_appointment'] : $errorcount++;
    $complaint = $_POST['complaint'] != "" ? $_POST['complaint'] : $errorcount++;
    $department = $_POST['department'] != "" ? $_POST['department'] : $errorcount++;
@@ -25,8 +25,6 @@ require_once('functions/alert.php');
    if(isset($_SESSION['loggedIn'])){
         $email = $_SESSION['loggedIn'];
     }
-
-   
 
    if( $errorcount > 0 ){
         $_SESSION['error'] = "You have " . $errorcount . " error";
