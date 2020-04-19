@@ -1,19 +1,16 @@
 <?php
     include('lib/header.php');
  ?>
-    <h3>Start.ng Hospital application</h3>
-        <p>This setup to keep record of incidence cases of COVID-19</p>
 
+ <div class='container'>
 
-
-<div class="card">
-  <div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some example text. Some example text.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h2><span style='color: blue'>Start.ng Hospital application</span></h2>
+  
+    <p>
+      <h4> The application helps hospital reduces issue related to attending to patient.
+</p></h4><p>
+      <h4><span style='color: orange'>You can try it out...</span></h4>
+      <a href="#" class='btn btn-success btn-lg'>More...</a>
+    </p>
+    
   </div>
-</div>
-<?php
-include('lib/footer.php');
-?>

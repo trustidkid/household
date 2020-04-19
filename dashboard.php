@@ -16,16 +16,14 @@ dashboard('Super Admin');
 
 $userlist = scandir("db/users/");
 
-echo "<p> <table align='center' vertical-align='center' style='width: 80%; 
-line-height='30px' border= 1px solid #dddddd;
-text-align=left;'> 
+echo "<div class='container'> <table class='table table-striped table-bordered table-hover'>
     <caption><h3>Staff / Patient List</h3></caption>
     <tr style='background-color: #344955; color: white'>
-        <th style='padding: 10px'>First Name</th> 
-        <th style='padding: 10px' >Last Name</th>
-        <th style='padding: 10px' >Email Address</th>
-        <th style='padding: 10px' >Gender</th>
-        <th style='padding: 10px'>Designation</th>
+        <th >First Name</th> 
+        <th >Last Name</th>
+        <th >Email Address</th>
+        <th >Gender</th>
+        <th>Designation</th>
     </tr>";
 for($count=2; $count < count($userlist); $count++){
 
@@ -42,18 +40,18 @@ for($count=2; $count < count($userlist); $count++){
         $email = $staffObject -> email;
         $gender = $staffObject -> gender;
         
-        echo "<tr style='padding: 15px;'>
-                <td style='padding: 5px;'>".$firstname."</td>
-                <td style='padding: 10px'>".$lastname."</td>
-                <td style='padding: 10px'>".$email."</td>
-                <td style='padding: 10px'>".$gender."</td>
-                <td style='padding: 10px'>".$designation."</td>
+        echo "<tr>
+                <td>".$firstname."</td>
+                <td >".$lastname."</td>
+                <td >".$email."</td>
+                <td >".$gender."</td>
+                <td>".$designation."</td>
             </tr>";
     
     }
 
 }
-echo "</table> </p>";
+echo "</table> </div>";
 
 ?>
 

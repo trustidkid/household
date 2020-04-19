@@ -94,26 +94,25 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<p>" ."<span style='color: green; margin-left:10%; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
-            echo "<table align='center' vertical-align='center' style='width: 80%; 
-                    line-height='30px'; border= 1px solid #dddddd; text-align=left;'>
+            echo "<div class='container'><p>" ."<span style='color: green; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
+            echo "<table class='table table-striped table-bordered table-hover'>
 
                     <caption><h3>Basic Data</h3></caption>
                     <tr style='background-color: #344955; color: white'>
-                        <th style='padding: 10px'>Login Time</th>
-                        <th style='padding: 10px'>Role</th>
-                        <th style='padding: 10px'>Department</th>
-                        <th style='padding: 10px'>Date Register</th>
+                        <th >Login Time</th>
+                        <th >Role</th>
+                        <th >Department</th>
+                        <th>Date Register</th>
                         <th style='padding: 10px'>Last Login Time</th>
                     </tr>
-                    <tr style='padding: 15px;'>
+                    <tr>
                         <td style='padding: 10px'>".$_SESSION['logintime']."</th>
-                        <td style='padding: 10px'>".$_SESSION['userlevel']."</th>
-                        <td style='padding: 10px'>".$_SESSION['department']."/th>
-                        <td style='padding: 10px'>".$_SESSION['dateregister']."</th>
-                        <td style='padding: 10px'>".$_SESSION['lastlogin']."</th>
+                        <td >".$_SESSION['userlevel']."</th>
+                        <td>".$_SESSION['department']."/th>
+                        <td >".$_SESSION['dateregister']."</th>
+                        <td>".$_SESSION['lastlogin']."</th>
                     </tr>
-                </table>";   
+                </table><div>";   
         }
         return false;
     }
@@ -142,6 +141,7 @@
     }
 
     function backButton($page){
-        echo "<a href='$page'><img src=''/><span style='color: #f9aa33'><strong>Back</strong></span></a>";
+       // echo "<a href='$page'><img src=''/><span style='color: #f9aa33'><strong>Back</strong></span></a>";
+        echo "<a href='$page' class='previous'>&laquo; Back</a>";
     }
 ?>

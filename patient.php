@@ -15,10 +15,17 @@ echo "<p>
 
 if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
 
-  echo "<div style='margin-left:10%; display:block; width: 200px; background-color: #f9aa33;'>
-          <a href='appointment.php'>Book Appointment</a>
-        </div"."||||".
-      "<div style='margin-right:40%'><a href='paybill.php'>Pay Bill</a></div";
+  echo "<div >
+            <p>
+                <a href='appointment.php' class='btn btn-warning btn-lg'>
+                  <span class='glyphicon glyphicon-random'></span> Book Appointment
+                </a>
+                <a href='paybill.php' class='btn btn-success btn-lg'>
+                  <span class='glyphicon glyphicon-usd'></span> Pay Bill
+                </a>
+          </p> 
+
+        </div";
 
 }else{
     header("location: login.php");

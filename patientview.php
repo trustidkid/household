@@ -14,7 +14,7 @@
     pageTitle("Patient Data Preview");
     
     if(isset($_SESSION['patientemail']) && !empty($_SESSION['patientemail'])){
-        echo "<p><table style='border:1px solid, color:red'>
+        echo "<div class='container'> <table class='table table-striped table-bordered table-hover'>
         <th>Full Name</th><th>Email Address</th><th>Gender</th><th>Department</th><th>Designation</th>
         <tr>
                 <td>".$fullname."</td>
@@ -23,12 +23,12 @@
                 <td>".$department."</td>
                 <td>".$designation."</td>
 
-        </tr></table></p>";
+        </tr></table> </div></p>";
     
     }
     echo "<p>
             <hr>
-        </p>";
-    backButton("medicalteam.php");
+        </p>".
+    backButton("medicalteam.php")."</div>";
 
 ?>
