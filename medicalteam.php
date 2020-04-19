@@ -3,13 +3,16 @@
     require_once('functions/user.php');
     require_once('functions/alert.php');
 
-    dashboard("Medical Team");
 
+    pageTitle("Doctor Corner");
+
+    dashboard("Medical Team");
+    
     $appointmentlist = scandir("db/appointment/");
     $userlist = scandir("db/users/");
 
 echo "<p> <table style='width='100%'; padding:10px; border= 1px solid #dddddd;
-text-align=center; background-color= #dddddd;'> 
+text-align=left; background-color= #dddddd;'> 
     <caption>Appointment Lists</caption>
     <tr><th>Full Name</th>
     <th>Appointment Date</th>
@@ -64,21 +67,19 @@ text-align=center; background-color= #dddddd;'>
                     $_SESSION['fullname'] = $firstname." ".$lastname;
                     $_SESSION['department'] = $department;
                     $_SESSION['designation'] = $designation;
+
+                    echo "<tr>
+                    <td>".$firstname." ".$lastname."</td>
+                    <td>".$appointmentdate. " ".$appointmenttime."</td>
+                    <td>".$nature_of_appointment."</td>
+                    <td>".$complaint."</td>
+                    <td>".$doctordepartment."</td>
+                    <td>".$dateRegister."</td>
+                    <td><a href='patientview.php'>"."View"."</a>.</td>".
+                    "</tr>";
                 }
             }
-            
-        echo "<tr>
-            <td>".$firstname." ".$lastname."</td>
-            <td>".$appointmentdate. " ".$appointmenttime."</td>
-            <td>".$nature_of_appointment."</td>
-            <td>".$complaint."</td>
-            <td>".$doctordepartment."</td>
-            <td>".$dateRegister."</td>
-            <td><a href='patientview.php'>"."View"."</a>.</td>".
-            "</tr>";
-            die();
         }
-    
     }
     echo "</table> </p>";
     echo "<strong>You have no pending appointments!</strong>";

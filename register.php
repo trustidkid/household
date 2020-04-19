@@ -9,7 +9,7 @@ checkUserRole();
 
 ?>
 <p>
-<H3><strong> Registeration Form </strong></H3>
+<? pageTitle("Registration Form");?>
 </p>
 
 <form method="POST" action="processRegister.php">
@@ -94,4 +94,4 @@ checkUserRole();
     
 </form>
 
-<?php include('lib/footer.php'); ?>
+<? backButton("dashboard.php") ?>

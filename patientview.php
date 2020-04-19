@@ -11,10 +11,7 @@
     $designation = $_SESSION['designation'];
     
     
-    echo "<p>
-             <h3>Patient Data Preview</h3>
-            <hr> 
-        </p>";
+    pageTitle("Patient Data Preview");
     
     if(isset($_SESSION['patientemail']) && !empty($_SESSION['patientemail'])){
         echo "<p><table style='border:1px solid, color:red'>
@@ -32,6 +29,6 @@
     echo "<p>
             <hr>
         </p>";
-    echo "<a href='medicalteam.php'><img src=''/><span style='color: grey'><strong>Back</strong></span></a>";
+    backButton("medicalteam.php");
 
 ?>

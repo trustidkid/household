@@ -5,9 +5,29 @@ session_start();
 require_once('functions/alert.php');
 require_once('functions/user.php');
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+/**
+ * PHP MAILER SETUP START
+ */
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+//require "user/composer/autoload_real.php";
+//require "/usr/local/bin/composer/autoload.php";
+require_once 'vendor/autoload.php';
+
+$mail = new PHPMailer();
+
+$mail->isSMTP();
+$mail->Host = 'smtp.mailtrap.io';
+$mail->SMTPAuth = true;
+$mail->Username = '854743967f9a4e'; 
+$mail->Password = 'b0306ceb161ca1';
+$mail->SMTPSecure = 'tls';
+$mail->Port = 2525;
+
+/**
+ * PHP MAILER SETUP END
+ */
 //print_r($_POST);
 $counterror = 0;
 $username = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
@@ -46,22 +66,42 @@ if( $counterror > 0){
               */
 
             //send mail to
-            $to = $username;
+            
+            //$to = $username;
             $subject = "Password Reset Link";
             $message = "You initated a request to reset your account password.";
             $message .= "If this was not from your please ignore. Otherwise, goto http://localhost:8080/household/resetpassword.php?token=".$token;
-            $headers = "From: yemi.bili@gmail.com" . "\r\n" .
-            "CC: yemi.bili07@gmail.com";
+            //$headers = "From: yemi.bili@gmail.com" . "\r\n" .
+           // "CC: yemi.bili07@gmail.com";
+
+            $mail->setFrom('no-reply@snh.com', 'SNH Hospital');
+            $mail->addReplyTo('info@msnh.com', 'Mailtrap');
+            $mail->addAddress($username, 'Tim'); 
+            $mail->addCC('yemi.bili07@gmail.com', 'Elena');
+            $mail->Subject = $subject;
+            $mail->isHTML(true);
+            $mail->Body = $message;
+
 
             $date = date('Y-m-d H:m:s');
             //save token
             file_put_contents("db/tokens/".$username.".json", json_encode(['token' =>$token, 'date'=>$date]));
 
-            $try = mail($to,$subject,$message,$headers);
-            error_log($try, 0);
+            if($mail->send()){
+                set_alert("message","Password reset sent to your email ".$username);
+                header("location: login.php");
+            }else{
+                $content = "Something went wrong. We cannot proceed further. Please try again later ".$username;
+                set_alert("error",$content);
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+                header("location: forgot.php");
+            }
+            
+           // $try = mail($to,$subject,$message,$headers);
+           
 
             //TODO To re-check sending email
-           
+           /*
             if($try){
                 set_alert("message","Password reset sent to your email ".$username);
                // $_SESSION['error'] = "Password reset sent to your email ".$username;
@@ -74,7 +114,7 @@ if( $counterror > 0){
                 //$_SESSION['error'] = "Something went wrong. We cannot proceed further. Please try again later ".$username;
                 header("location: forgot.php");
 
-            }
+            } */
             die(); 
         }
         

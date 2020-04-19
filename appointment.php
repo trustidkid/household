@@ -11,8 +11,7 @@ include('functions/user.php');
     }
 ?>
 <p>
-    <H3><strong> Appointment Form </strong></H3>
-    <hr>
+    <? pageTitle("Appointment Registeration"); ?>
 </p>
 
 <form method="POST" action="processAppointment.php">
@@ -68,5 +67,7 @@ include('functions/user.php');
 </p>
     
 </form>
+
+<
 
 <?php include('lib/footer.php'); ?>

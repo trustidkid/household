@@ -2,7 +2,7 @@
 
 session_start();
 
-//print_r($_POST);
+//print_r($_POST); die();
 $counterror = 0;
 $username = $_POST['email'] != "" ? $_POST['email'] : $counterror++;
 $password = $_POST['password'] != "" ? $_POST['password'] : $counterror++;

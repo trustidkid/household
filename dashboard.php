@@ -7,9 +7,10 @@
 ?>
 
 <p>
-<h3>Dashboard</h3>
+
 
 <? 
+pageTitle("Admin Corner");
 //add dashboard data;
 dashboard('Super Admin');
 

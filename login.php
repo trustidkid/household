@@ -15,27 +15,33 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
         print_alert();
     ?>
 </p>
-<p>Login Page</p>
+<p> <? pageTitle("Login Form"); ?></p>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
-<form method="POST" action="processLogin.php">
+<div id="id01" class="modal">
 
-<p>
-    <label for="email">Email</label><br>
-    <input type="email" name="email" value="<?php if(isset($_SESSION['email'])){
-        echo $_SESSION['email'];
-    } ?>" placeholder="Email">
-</p>
-<p>
-    <label for="email">Password</label><br>
-    <input type="password" name="password" placeholder="Password" require>
-</p>
+    <form class="modal-content animate" method="POST" action="processLogin.php">
 
-<p>
-    <button type="submit">Login</button> <button type="reset">Reset</button>
-    
-</p>
-<p><a href="forgot.php">Forgot Password</a></p>
-    
-</form>
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="avatar.png" alt="Avatar" class="avatar">
+    </div>
 
-<?php include('lib/footer.php'); ?>
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" value="<? if(isset($_SESSION['email'])) echo $_SESSION['email']; ?>" placeholder="Enter Username" name="email" required>
+
+        <label for="email"><strong>Password</strong></label>
+        <input type="password" name="password" placeholder="Password" require>
+
+        <button type="submit" >Login</button>
+        <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="forgot.php">password?</a></span>
+    </div>
+    </form>
+</div>

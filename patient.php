@@ -7,8 +7,9 @@
 <?php
 
 print_alert();
-
+pageTitle("Patient Corner");
 dashboard('Patient');
+
 if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
 
   $_SESSION['email'] = $_SESSION['loggedIn'];
