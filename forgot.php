@@ -1,31 +1,33 @@
 <?php include('lib/header.php') ?>
 
-<h3>Forgot Password</h3>
-<p>Provide email address associated with your account </p>
+    <div class='container'>
+        <h3>Forgot Password</h3>
+        <p>Provide email address associated with your account </p>
 
-<form method="POST" action="processForgot.php">
+        <form role="form" method="POST" action="processForgot.php">
 
-<?php
-    if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
-    echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
-    session_unset();
-}
- ?>
+            <?php
+                if(isset($_SESSION['error'] ) && !empty(isset($_SESSION['error']))){
+                echo "<span style='color: red' >" . $_SESSION['error'] . "</span>";
+                session_unset();
+            }
+            ?>
 
-<p>
-    <label for="email">Email</label><br>
-    <input 
-    <?php if(isset($_SESSION['loggedIn'])){
-        echo "value=". $_SESSION['loggedIn'];
-    } ?>
-    type="email" name="email" require  placeholder="Email">
-</p>
+            
+            <div class="form-group row">
+                <label for="email">Enter Email</label><br>
+                <input 
+                    <?php if(isset($_SESSION['loggedIn'])){
+                        echo "value=". $_SESSION['loggedIn'];
+                    } ?>
+                type="email" name="email" placeholder="Email" require>
+            </div>
 
-<p>
-    <button type="submit">Submit</button>
-    
-</p>
-    
-</form>
+            <div class="form-group row">
+                <button type="submit">Submit</button>
+                
+            </div>
+            
+        </form>
 
-<?php include('lib/footer.php') ?>
+    </div>

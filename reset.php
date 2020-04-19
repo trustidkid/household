@@ -14,18 +14,20 @@ require_once('functions/alert.php');
 
 <h3>Reset Password</h3>
 <p>Reset password associated with your account: <? checkEmail();?> </p>
-<form ole="form" method="POST" action="processReset.php">
-    <?php
-        print_alert();
-    ?>
+<form role="form" method="POST" action="processReset.php">
+        <?php
+            print_alert();
+        ?>
+        
         <div class="form-group row">
-            <label for="email" >Email</label><br>
-            <input
+                <label for="email">Email</label><br>
+                <input 
                 <? 
                     checkEmail();
                 ?>
-            type="email" name="email" placeholder="Email address">
+                type="email" name="email" placeholder="Email" require>
         </div>
+
         <div class="form-group row">
             <?php if(!is_user_loggedIn()){?>
             <input
@@ -39,6 +41,8 @@ require_once('functions/alert.php');
             type="hidden" name="token">
             <?php }?>
         </div>
+
+        
         <div class="form-group row">
             <label for="email">Enter New Password</label><br>
             <input type="password" name="password" placeholder="Password" require>
@@ -52,6 +56,3 @@ require_once('functions/alert.php');
     </form>
     </div>
 </div>
-
-
-<?php include('lib/footer.php') ?>
