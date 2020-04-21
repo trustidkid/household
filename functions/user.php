@@ -24,7 +24,7 @@
 
 
     function checkEmail(){
-        if(isset($_SESSION['email'])) {
+        if(isset($_SESSION['email']) && !empty($_SESSION['email'])) {
             echo $_SESSION['email'];
         }
     }
@@ -94,7 +94,7 @@
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
     
-            echo "<div class='container'><p>" ."<span style='color: green; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
+            echo "<p>" ."<span style='color: green; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
             echo "<table class='table table-striped table-bordered table-hover'>
 
                     <caption><h3>Basic Data</h3></caption>
@@ -180,7 +180,7 @@
 
     function pageTitle($title){
         echo "<p>
-             <h3><span style='color:#344955; margin-left:10%'>".$title."</span></h3>
+             <h3><span style='color:#344955;'>".$title."</span></h3>
             <hr> 
         </p>";
     }

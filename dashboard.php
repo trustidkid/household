@@ -6,6 +6,7 @@
     
 ?>
 <? 
+echo "<div class='container'>";
 pageTitle("Admin's Corner");
 //add dashboard data;
 dashboard('Super Admin');

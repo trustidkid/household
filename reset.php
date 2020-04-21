@@ -10,22 +10,32 @@ require_once('functions/alert.php');
     }
     
 ?>
-<div class='container'>
 
+<div class='container'>
 <h3>Reset Password</h3>
-<p>Reset password associated with your account: <? checkEmail();?> </p>
+<p>Reset password associated with your account: <b> <? checkEmail();?></b></p>
+
+
 <form role="form" method="POST" action="processReset.php">
         <?php
             print_alert();
         ?>
         
         <div class="form-group row">
-                <label for="email">Email</label><br>
-                <input 
-                <? 
-                    checkEmail();
-                ?>
-                type="email" name="email" placeholder="Email" require>
+        <? 
+            if(!is_user_loggedIn()){
+            echo "<label for='email'>Email</label><br>";
+            }
+        ?>
+        
+        <input
+            <?
+                if(!is_user_loggedIn()){
+                   echo "type ='email'";
+                }else{
+                   echo "type ='hidden'";
+                } ?>
+            name="email" value="<? if(is_user_loggedIn()) checkEmail()?>" placeholder="Email" require>
         </div>
 
         <div class="form-group row">

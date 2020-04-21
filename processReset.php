@@ -131,7 +131,7 @@ if( $counterror > 0){
 
                         if($mail->send()){
                             set_alert("message","Password reset was successful for account ".$email);
-                            header("location: login.php");
+                            header("location: logout.php");
                         }else{
                             $content = "Something went wrong. We cannot proceed further. Please try again later ".$username;
                             set_alert("error",$content);

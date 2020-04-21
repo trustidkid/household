@@ -13,8 +13,8 @@
         
     </head>
     <body style="padding:10px">
-      <nav class="navbar navbar-inverse">
-      <a class="navbar-brand" href="#"><img src="image/logofree.png" width="40px" alt="Avatar"></a>
+      <nav class="navbar navbar-inverse" style='background-color: #344955; color: white'>
+      <a class="navbar-brand" href="#"><img src="image/avatar.png" width="40px" alt="Avatar"></a>
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,9 +27,9 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="#">Information</a></li>
-            <li><a href="#">Cases</a></li>
-            <li><a href="#">Emergency Numbers</a></li> 
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li> 
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <?php 
