@@ -6,8 +6,9 @@
 ?>
 <?php
 
+echo "<div class='container'>";
 print_alert();
-pageTitle("Patient Corner");
+pageTitle("Patient's Corner");
 
 dashboard('Patient');
 echo "<p>

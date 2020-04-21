@@ -71,5 +71,5 @@ include('functions/user.php');
 backButton("patient.php");
 
 echo "</div>";
-include('lib/footer.php'); ?>
+
 
