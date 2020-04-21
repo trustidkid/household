@@ -15,6 +15,4 @@
     
   </div>
 
-  <?php
-    include('lib/footer.php');
- ?>
+
