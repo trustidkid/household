@@ -76,6 +76,7 @@
         return false;
     }
 
+
     function saveUser($userObject){
 
         file_put_contents("db/users/".$userObject['email'].".json", json_encode($userObject));
@@ -187,6 +188,6 @@
 
     function backButton($page){
        // echo "<a href='$page'><img src=''/><span style='color: #f9aa33'><strong>Back</strong></span></a>";
-        echo "<a href='$page' class='previous'>&laquo; Back</a>";
+        echo "<a href='$page' class='btn btn-info btn-lg'>&laquo; Back</a>";
     }
 ?>

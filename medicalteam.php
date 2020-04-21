@@ -4,6 +4,7 @@
     require_once('functions/alert.php');
 
 
+    echo "<div class='container'>";
     pageTitle("Doctor Corner");
 
     dashboard("Medical Team");
@@ -61,6 +62,7 @@
                     $gender = $patientObject -> gender;
                     $department = $patientObject -> department;
                     $designation = $patientObject -> designation;
+                    $id = $patientObject -> id;
 
 
                     $_SESSION['patientemail'] = $email;
@@ -76,7 +78,11 @@
                     <td >".$complaint."</td>
                     <td >".$doctordepartment."</td>
                     <td >".$dateRegister."</td>
-                    <td><a href='patientview.php'>"?><? echo $count . " view</a>.</td>".
+                    <td>
+                        <a href='patientview.php?id=$email'>
+                            view
+                            </a>
+                    </td>".
                     "</tr>";
                 }
             }
@@ -92,6 +98,3 @@
 
 
 ?>
-<p>
-
-</p>

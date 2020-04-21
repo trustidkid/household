@@ -1,10 +1,12 @@
 
 <p>
 
-<nav class="navbar fixed-bottom navbar-light bg-light">
-  <a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
-</nav>
 
+<div class="footer">
+<a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
+<a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
+<a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
+<a class="navbar-brand" href="#">Copyright (C) 2020 midastouch.com </a>
 <!-- <ul><a href="index.php">Home</a></ul>
             <a href="index.php">Home</a>
             <?php 
@@ -18,6 +20,7 @@
                 <?php } ?>
             <a href="forgot.php">Forgot Password</a>
 -->
+</div>
         </p>
     </body>
 </html>

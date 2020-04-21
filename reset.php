@@ -16,7 +16,7 @@ require_once('functions/alert.php');
 <p>Reset password associated with your account: <b> <? checkEmail();?></b></p>
 
 
-<form role="form" method="POST" action="processReset.php">
+    <form role="form" method="POST" action="processReset.php">
         <?php
             print_alert();
         ?>
@@ -64,5 +64,14 @@ require_once('functions/alert.php');
         </div>
     
     </form>
+    <?php
+        if($_SESSION['userlevel']=="Medical Team")
+            backButton("medicalteam.php");
+        if($_SESSION['userlevel']=="Patient")
+            backButton("patient.php");
+        if($_SESSION['userlevel']=="Super Admin")
+            backButton("dashboard.php");
+    ?>
     </div>
+    
 </div>

@@ -17,6 +17,14 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+.footer {
+    display: flexbox;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin: 0;
+}
+
 
 /* Set a style for all buttons */
 

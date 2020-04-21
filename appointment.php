@@ -53,7 +53,7 @@ include('functions/user.php');
     </p>
     <p>
         <label for="intial complaint"></label>
-        <textarea rows="4" cols="53" name="complaint" value="
+        <textarea rows="4" cols="53"  name="complaint" value="
         <?php if(isset($_SESSION['complaint'])){
             echo $_SESSION['complaint'];
             

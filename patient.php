@@ -22,7 +22,7 @@ if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
                   <span class='glyphicon glyphicon-random'></span> Book Appointment
                 </a>
                 <a href='paybill.php' class='btn btn-success btn-lg'>
-                  <span class='glyphicon glyphicon-usd'></span> Pay Bill
+                  <span class='glyphicon glyphicon-usd'></span> Make Payment
                 </a>
           </p> 
 
