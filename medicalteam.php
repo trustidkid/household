@@ -11,8 +11,9 @@
     $appointmentlist = scandir("db/appointment/");
     $userlist = scandir("db/users/");
 
-    echo "<div class='container'><table class='table table-striped table-bordered table-hover'>
-    <caption><h3>Appointment List</h3></caption>
+    echo "
+        <table class='table table-striped table-bordered table-hover'>
+        <caption><h3>Appointment List</h3></caption>
         <tr style='background-color: #344955; color: white'>
             <th >Full Name</th>
             <th >Appointment Date</th>
@@ -75,21 +76,19 @@
                     <td >".$complaint."</td>
                     <td >".$doctordepartment."</td>
                     <td >".$dateRegister."</td>
-                    <td><a href='patientview.php'>"?><? echo $count . " View</a>.</td>".
+                    <td><a href='patientview.php'>"?><? echo $count . " view</a>.</td>".
                     "</tr>";
                 }
             }
         }
+        
+        //die();
     }
-    echo "</table>".
-        "<ul class='pagination'>
-            <li><a href='#'>1</a></li>
-            <li><a href='#'>2</a></li>
-            <li><a href='#'>3</a></li>
-            <li><a href='#'>4</a></li>
-            <li><a href='#'>5</a></li>
-        </ul> ".
-     "<strong><span style='margin-left:10%'>You have no pending appointments!</span></strong></div>";
+    echo "</table>";
+
+    echo   
+        "<strong><span style='margin-left:10%'>You have no pending appointments!</span></strong></div>";
+    
 
 
 ?>

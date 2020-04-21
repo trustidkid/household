@@ -106,11 +106,11 @@
                         <th style='padding: 10px'>Last Login Time</th>
                     </tr>
                     <tr>
-                        <td style='padding: 10px'>".$_SESSION['logintime']."</th>
-                        <td >".$_SESSION['userlevel']."</th>
-                        <td>".$_SESSION['department']."/th>
-                        <td >".$_SESSION['dateregister']."</th>
-                        <td>".$_SESSION['lastlogin']."</th>
+                        <td >".$_SESSION['logintime']."</td>
+                        <td >".$_SESSION['userlevel']."</td>
+                        <td>".$_SESSION['department']."</td>
+                        <td >".$_SESSION['dateregister']."</td>
+                        <td>".$_SESSION['lastlogin']."</td>
                     </tr>
                 </table><div>";   
         }
@@ -131,6 +131,51 @@
             }
     
         }
+    }
+
+    function tableHeader($caption){
+       echo "<table class='table table-striped table-bordered table-hover'>
+    <caption><h3>".$caption."</h3></caption>
+    <tr style='background-color: #344955; color: white'>
+        <th >First Name</th> 
+        <th >Last Name</th>
+        <th >Email Address</th>
+        <th >Gender</th>
+        <th>Designation</th>
+    </tr>";
+    }
+
+    /**
+     * $userlist: The table
+     * $userDesignation: specify the type of user level eg. patient or medical team
+     */
+    //returns list of user with similar role
+    function getUserList($userlist, $userDesignation){
+        for($count=2; $count < count($userlist); $count++){
+
+            $staff = file_get_contents("db/users/". $userlist[$count]);
+            //echo "<p> file name". $userlist[$count]. "</p>";
+            $staffObject = json_decode($staff);
+            $designation='';
+            //TODO: To seperate staff from patient on the list
+            $designation = $staffObject -> designation;
+        
+           if( $designation == $userDesignation){
+                $firstname = $staffObject -> firstname;
+                $lastname = $staffObject -> lastname;
+                $email = $staffObject -> email;
+                $gender = $staffObject -> gender;
+                
+                echo "<tr>
+                        <td>".$firstname."</td>
+                        <td >".$lastname."</td>
+                        <td >".$email."</td>
+                        <td >".$gender."</td>
+                        <td>".$designation."</td>
+                    </tr>";
+            }
+        }
+        echo "</table>";
     }
 
     function pageTitle($title){
