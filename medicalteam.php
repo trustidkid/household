@@ -5,7 +5,7 @@
 
 
     echo "<div class='container'>";
-    pageTitle("Doctor Corner");
+    pageTitle("Doctor's Corner");
 
     dashboard("Medical Team");
     
@@ -64,6 +64,8 @@
                     $department = $patientObject -> department;
                     $designation = $patientObject -> designation;
                     $id = $patientObject -> id;
+
+                    $_SESSION['patientemail'] = $email;
 
                     echo "<tr>
                     <td >".$firstname." ".$lastname."</td>
