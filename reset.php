@@ -65,12 +65,16 @@ require_once('functions/alert.php');
     
     </form>
     <?php
-        if($_SESSION['userlevel']=="Medical Team")
-            backButton("medicalteam.php");
-        if($_SESSION['userlevel']=="Patient")
-            backButton("patient.php");
-        if($_SESSION['userlevel']=="Super Admin")
-            backButton("dashboard.php");
+        if(is_user_loggedIn()){
+
+            if($_SESSION['userlevel']=="Medical Team")
+                backButton("medicalteam.php");
+            if($_SESSION['userlevel']=="Patient")
+                backButton("patient.php");
+            if($_SESSION['userlevel']=="Super Admin")
+                backButton("dashboard.php");
+        }
+        
     ?>
     </div>
     
