@@ -90,12 +90,9 @@
 
     }
 
-    //TODO: To add boostrap to the dashboard.
-    //To display initial user data on the dashboard
+    //Displays initial user data on the dashboard
     function dashboard($role = ""){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn']) && $_SESSION['userlevel'] == $role){
-    
-            echo "<p>" ."<span style='color: green; font-size:16px' >". "You are welcome ". $_SESSION['email']. "</span>"."</p>";
             echo "<table class='table table-striped table-bordered table-hover'>
 
                     <caption><h3>Basic Data</h3></caption>
@@ -180,14 +177,16 @@
     }
 
     function pageTitle($title){
-        echo "<p>
+        echo "<div class='nav navbar-nav navbar-right'>
+            <span style='color: grey; font-size:16px'>". $_SESSION['loggedIn']. "</span>
+            </div>".
+            "<p>
              <h3><span style='color:#344955;'>".$title."</span></h3>
             <hr> 
         </p>";
     }
 
     function backButton($page){
-       // echo "<a href='$page'><img src=''/><span style='color: #f9aa33'><strong>Back</strong></span></a>";
         echo "<a href='$page' class='btn btn-info btn-lg'>&laquo; Back</a>";
     }
 ?>

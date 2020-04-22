@@ -35,7 +35,7 @@
             $doctordepartment = $doctorObject -> department;
 
             for($count=2; $count < count($appointmentlist); $count++){
-
+                $countPatient ="";
                 //get the list of all appointments
                 $appointmentString = file_get_contents("db/appointment/". $appointmentlist[$count]);
                 $appointmentObject = json_decode($appointmentString);
@@ -46,6 +46,7 @@
                 //chechk if department patient have appointment with is the same as doctor department
                 if($doctordepartment == $appointmentdepartment){
 
+                    $countPatient = $count;
                     $appointmentdate = $appointmentObject -> appointmentdate;
                     $appointmenttime = $appointmentObject -> appointmenttime;
                     $nature_of_appointment = $appointmentObject -> nature_of_appointment;
@@ -63,13 +64,6 @@
                     $department = $patientObject -> department;
                     $designation = $patientObject -> designation;
                     $id = $patientObject -> id;
-
-
-                    $_SESSION['patientemail'] = $email;
-                    $_SESSION['gender'] = $gender;
-                    $_SESSION['fullname'] = $firstname." ".$lastname;
-                    $_SESSION['department'] = $department;
-                    $_SESSION['designation'] = $designation;
 
                     echo "<tr>
                     <td >".$firstname." ".$lastname."</td>
@@ -91,9 +85,9 @@
         //die();
     }
     echo "</table>";
-
-    echo   
-        "<strong><span style='margin-left:10%'>You have no pending appointments!</span></strong></div>";
+    //display when no patient department matches doctor department
+    if($countPatient < 1)
+    echo  "<strong><span style='color: red'>You have no pending appointments!</span></strong></div>";
     
 
 
