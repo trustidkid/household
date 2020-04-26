@@ -62,12 +62,12 @@
         $allusers = scandir("db/users/");
         
         for($counter = 0; $counter < count($allusers); $counter++){
-            $currentuser = $email.".json";
+            $email = $email.".json";
             //check for email
-            if($allusers[$counter] == $currentuser){
+            if($allusers[$counter] == $email){
 
                 //compare user password with database
-                $userString = file_get_contents("db/users/". $currentuser);
+                $userString = file_get_contents("db/users/". $email);
                 $userObject = json_decode($userString);
     
                 return $userObject;
@@ -86,8 +86,23 @@
         file_put_contents("db/users/".$filename.".json", json_encode($AppointmentObject));
     }
 
-    function updateRecord($userObject){
+    function updateRecord($email){
 
+                
+                        $userString = file_get_contents("db/users/".$email);
+                        $userObject = json_decode($userString); 
+                        
+                        //modify the password
+                        $userObject -> password = password_hash($password, PASSWORD_DEFAULT);
+                        //delete the existing file
+                        unlink("db/users/".$email);
+                        //unlink("db/users/".$userObject['email'].".json");
+                        
+
+                        //save the updated user data to the database
+                        file_put_contents("db/users/".$email.".json",json_encode($userObject));
+                
+            
     }
 
     //Displays initial user data on the dashboard
@@ -128,6 +143,26 @@
                 die();
             }
     
+        }
+    }
+
+    function sendMail(){
+        $mail->setFrom('no-reply@snh.com', 'SNH Hospital');
+        $mail->addReplyTo('info@msnh.com', 'SNH');
+        $mail->addAddress($email, 'user'); 
+        $mail->addCC('yemi.bili07@gmail.com', 'client');
+        $mail->Subject = $subject;
+        $mail->isHTML(true);
+        $mail->Body = $message;
+
+        if($mail->send()){
+            set_alert("message","Password reset was successful for account ".$email);
+            header("location: logout.php");
+        }else{
+            $content = "Something went wrong. We cannot proceed further. Please try again later ".$username;
+            set_alert("error",$content);
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            header("location: reset.php");
         }
     }
 

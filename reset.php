@@ -24,7 +24,7 @@ require_once('functions/alert.php');
         <div class="form-group row">
         <? 
             if(!is_user_loggedIn()){
-            echo "<label for='email'>Email</label><br>";
+                echo "<label for='email'>Email</label><br>";
             }
         ?>
         

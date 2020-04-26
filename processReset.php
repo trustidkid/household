@@ -37,7 +37,7 @@ if(!isset($_SESSION['loggedIn'])){
     $token = $_POST['token'] != "" ? $_POST['token'] : $counterror++; 
     $_SESSION['token'] = $token; 
 }
-$_SESSION['email'] = $email; 
+$_SESSION['email'] = $email;
 
 if( $counterror > 0){
 
@@ -77,10 +77,6 @@ if( $counterror > 0){
             if($checktoken){
                 //update user password
 
-                //$userObject = findUser($email);
-               // echo $userObject;
-                //die();
-
                $alluser = scandir("db/users/");
                 for($count = 0; $count < count($alluser); $count++){
                     $currentuser = $alluser[$count];
@@ -104,11 +100,6 @@ if( $counterror > 0){
                          */
 
                          //send mail to
-                       
-                        $subject = "Password Reset Successful";
-                        $message = "Your password has been reset successfully. If this was not initiated from you. Please goto snh.org and reset the password.";
-                        $headers = "From: no-reply@snh.com" . "\r\n" .
-                        "CC: yemi.bili07@gmail.com";
 
                         //TODO We can decide to delete the token after successful reset is completed.
                         //delete token
@@ -152,6 +143,7 @@ if( $counterror > 0){
 
     }
     //email not not exist
+    
     $content = "Email did not exist";
     set_alert("error",$content);
     header("location: reset.php");

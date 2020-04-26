@@ -3,7 +3,6 @@ include('lib/header.php');
 include('functions/alert.php');
 include('functions/user.php');
 
-//TODO: TO CHECK SESSION MANAGEMENT THAT LOGS OUT USER AFTER 2 CLICKS ON A LINK
 //if user has already logged in
 checkUserRole();
 
@@ -13,7 +12,7 @@ checkUserRole();
     <? pageTitle("Registration Form");?>
     </p>
 
-    <form method="POST" action="processRegister.php">
+    <form role="form" method="POST" action="processRegister.php">
 
     <?php
     print_alert();
