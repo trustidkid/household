@@ -36,8 +36,9 @@
 
         //if no user is login show register and login link
         if(!isset($_SESSION['loggedIn'])){
-           echo " <li><a href='login.php'><span class='glyphicon glyphicon-log-in '></span> Login</a></li>";
-           echo "<li><a href='forgot.php'><span class='glyphicon glyphicon-user'></span> Forgot Password</a></li>";
+          echo "<li><a href='newuser.php'><span class='glyphicon glyphicon-user'></span> Register</a></li>";
+          echo " <li><a href='login.php'><span class='glyphicon glyphicon-log-in '></span> Login</a></li>";
+          echo "<li><a href='forgot.php'><span class='glyphicon glyphicon-user'></span> Forgot Password</a></li>";
         }else if(isset($_SESSION['userlevel']) == "Super Admin"){
           //TODO: TO CHECK WHY THIS APPLIES TO ALL USER
           echo "<li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Register</a></li>";

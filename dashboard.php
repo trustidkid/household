@@ -23,4 +23,21 @@ getUserList($userlist,"Medical Team");
 tableHeader("List of Patient");
 //returns the list of patient
 getUserList($userlist,"Patient");
+
+//returns the list of payments
+echo "<table class='table table-striped table-bordered table-hover'>
+        <caption><h3>Payment History</h3></caption>
+        <tr style='background-color: #344955; color: white'>
+        <th >Payment Date</th> 
+        <th>Patient Email</th>
+        <th >Amount</th>
+        <th >Appointment ID</th>
+        <th>Details...</th>
+        </tr>";
+getAllPayment();
+echo "</table>";
+
+
+
+
 ?>

@@ -37,9 +37,9 @@ if(isset($_SESSION['loggedIn']) && !empty(isset($_SESSION['loggedIn']))){
             <input type="password" name="password" placeholder="Password" require><br>
 
             <button type="submit" >Login</button><br>
-            <label>
+           <!-- <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
+            </label>-->
         </div>
         <!--<div class="container" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>

@@ -51,7 +51,7 @@ if( $counterror > 0){
 
 }else{
 
-    //TODO: To check why Reset Password failed.
+    
 
     $tokenDirectory = scandir("db/tokens");
 

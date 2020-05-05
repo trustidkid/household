@@ -1,5 +1,6 @@
 <?php
     require_once('alert.php');
+
     function is_user_loggedIn(){
 
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
@@ -29,6 +30,35 @@
         }
     }
 
+    /**
+     * Check if an appointment already exist
+     * $email: The user mail
+     * $department: Department he intend to book appointment with
+     * $appointmentdate: The date of the appointment
+     */
+    function paymentExists($paymentid){
+
+        $allpayment = scandir("db/payments/");
+        
+        for($counter = 1; $counter <= count($allpayment); $counter++){
+            $filename = "pay_".$counter.".json";
+            $paymentString = file_get_contents("db/payments/". $filename);
+            $paymentObject = json_decode($paymentString);
+            $paymentfromDB = $paymentObject -> paymentid;
+
+            if($paymentfromDB == $paymentid){
+                return $appointmentObject;
+           }
+        }
+        return false;
+    }
+
+    /**
+     * Check if an appointment already exist
+     * $email: The user mail
+     * $department: Department he intend to book appointment with
+     * $appointmentdate: The date of the appointment
+     */
     function findAppointment($email = "", $department, $appointmentdate ){
         if(!$email){
             set_alert("error", "User email not found");
@@ -52,6 +82,44 @@
         return false;
     }
 
+    /**
+     * Get all apppointments under user account
+     * $email: the user email account
+     */
+    function getUserAppointment($folder,$email){
+        for($count=2; $count < count($folder); $count++){
+            
+            //get the list of all appointments
+            $appointmentString = file_get_contents("db/appointment/". $folder[$count]);
+            $appointmentObject = json_decode($appointmentString);
+            $emailfromDB = $appointmentObject -> email;
+            
+            if($emailfromDB == $email){
+                
+                    $id= $appointmentObject -> id;
+                    $appointmentdate = $appointmentObject -> appointmentdate;
+                    $appointmenttime = $appointmentObject -> appointmenttime;
+                    $department = $appointmentObject -> department;
+                    $nature_of_appointment = $appointmentObject -> nature_of_appointment;
+                    $complaint = $appointmentObject -> complaint;
+              
+                    echo "
+                    <tr>     
+                        <td >".$appointmentdate. " ".$appointmenttime."</td>
+                        <td >".$nature_of_appointment."</td>
+                        <td >".$complaint."</td>
+                        <td >".$department."</td>
+                                    
+                        <td>
+                          <a href='paybill.php?id=$id' class='btn btn-warning btn-sm' >
+                          <span class='glyphicon glyphicon-check'>Pay</span>
+                          </a>
+                        </td>
+                    </tr></div>";
+            }
+       }
+}
+
     function findUser($email = ""){
 
         if(!$email){
@@ -62,12 +130,12 @@
         $allusers = scandir("db/users/");
         
         for($counter = 0; $counter < count($allusers); $counter++){
-            $email = $email.".json";
+            $currentuser = $email.".json";
             //check for email
-            if($allusers[$counter] == $email){
+            if($allusers[$counter] == $currentuser){
 
                 //compare user password with database
-                $userString = file_get_contents("db/users/". $email);
+                $userString = file_get_contents("db/users/". $currentuser);
                 $userObject = json_decode($userString);
     
                 return $userObject;
@@ -76,6 +144,10 @@
         return false;
     }
 
+    function savePayment($paymentObject){
+
+        file_put_contents("db/payments/".$paymentObject['email'].".json", json_encode($paymentObject));
+    }
 
     function saveUser($userObject){
 
@@ -171,7 +243,7 @@
     <caption><h3>".$caption."</h3></caption>
     <tr style='background-color: #344955; color: white'>
         <th >First Name</th> 
-        <th >Last Name</th>
+        <th>Last Name</th>
         <th >Email Address</th>
         <th >Gender</th>
         <th>Designation</th>
@@ -211,9 +283,71 @@
         echo "</table>";
     }
 
+    function getPaymentPerUser($folder, $useremail){
+
+        for($count=2; $count < count($folder); $count++){
+
+            $foldername = file_get_contents("db/payments/". $folder[$count]);
+            $folderObject = json_decode($foldername);
+            if($folderObject -> email == $useremail){
+                $id = $folderObject -> appointmentid;
+                $date = $folderObject -> paymentdate;
+                $amount = $folderObject -> amount;
+                echo "<tr>
+                        <td>".$date."</td>
+                        <td >".$useremail."</td>
+                        <td>".$amount."</td>
+                        <td>
+                            <a href='appointment.php?id=$id'>
+                                        view
+                            </a>
+                        </td>
+                        
+                    </tr>";
+            }
+            
+        }
+
+    }
+
+    /**
+     * Get the list of payment made by patients
+     */
+
+function getAllPayment(){
+    $folder = scandir("db/payments");
+        
+    for($count=2; $count < count($folder); $count++){
+
+        $paymentString = file_get_contents("db/payments/". $folder[$count]);
+        $paymentObject = json_decode($paymentString);
+        $paymentdate = $paymentObject -> paymentdate;
+        $patientemail = $paymentObject -> email;
+        $amount = $paymentObject -> amount;
+        $appointmentid = $paymentObject -> appointmentid;
+        echo "
+        <tr>       
+            <td>".$paymentdate."</td>
+            <td >".$patientemail."</td>
+            <td>".$amount."</td>
+            <td>".$appointmentid."</td>
+            <td>
+                <a href='appointment.php?id=$appointmentid'>
+                <span class='glyphicon glyphicon-zoom-in'></span>
+                </a>
+            </td>        
+        </tr>";
+        }
+        
+     }
+
     function pageTitle($title){
-        echo "<div class='nav navbar-nav navbar-right'>
-            <span style='color: grey; font-size:16px'>". $_SESSION['loggedIn']. "</span>
+        $userlogin ="";
+        if($_SESSION['loggedIn'])
+            $userlogin = $_SESSION['loggedIn'];
+        else $userlogin;
+        echo "<div class='container'><div class='nav navbar-nav navbar-right'>
+            <span style='color: grey; font-size:16px'>".$userlogin. "</span>
             </div>".
             "<p>
              <h3><span style='color:#344955;'>".$title."</span></h3>
@@ -223,5 +357,22 @@
 
     function backButton($page){
         echo "<a href='$page' class='btn btn-info btn-lg'>&laquo; Back</a>";
+    }
+
+    /**
+     * This method generate token
+     * $arrayAlphabet: array of number of character (number or alphabet)
+     * $tokenSize: length of characters to generate
+     * */
+    function generateToken($arrayAlphabet, $tokenSize){
+        $token = "";
+        for($i = 0; $i <= $tokenSize; $i++){
+            //pick a number between 0 and total numbers in letters
+            $index = mt_rand(0,count($arrayAlphabet)-1);
+            $token .= $arrayAlphabet[$index];
+
+        }
+        
+        return $token;
     }
 ?>

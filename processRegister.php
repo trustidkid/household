@@ -14,7 +14,7 @@ require_once('functions/alert.php');
    $password = $_POST['password'] != "" ? $_POST['password'] : $errorcount++;
    $gender = $_POST['gender'] != "" ? $_POST['gender'] : $errorcount++;
    $designation = $_POST['designation'] != "" ? $_POST['designation'] : $errorcount++;
-   $department = $_POST['department'] != "" ? $_POST['password'] : $errorcount++;
+   $department = $_POST['department'] != "" ? $_POST['department'] : $errorcount++;
 
    $splitemail = explode("@",$email);
 
@@ -39,13 +39,7 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
     die();
 }
 
-   $_SESSION['firstname'] = $firstname;
-   $_SESSION['lastname'] = $lastname;
-   $_SESSION['email'] = $email;
-   $_SESSION['gender'] = $gender;
-   $_SESSION['designation'] = $designation;
-   $_SESSION['department'] = $department;
-
+   
 
    if( $errorcount > 0 ){
        //redirect back to register page
@@ -59,6 +53,14 @@ if( strlen($splitemail[0]) < 5 || strpos($splitemail[1],".") == 0) {
        header('Location: register.php');
    }else{
     //save to a file
+
+    $_SESSION['firstname'] = $firstname;
+    $_SESSION['lastname'] = $lastname;
+    $_SESSION['email'] = $email;
+    $_SESSION['gender'] = $gender;
+    $_SESSION['designation'] = $designation;
+    $_SESSION['department'] = $department;
+
 
     //auto generate ID
     $directory = "db/users";

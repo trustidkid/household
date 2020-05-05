@@ -18,7 +18,7 @@ checkUserRole();
     print_alert();
     ?>
 
-    <p>
+    <div class="form-group row">
         <label for="firstname">First Name</label><br>
         <input 
         <?php
@@ -28,26 +28,26 @@ checkUserRole();
         ?>
         
         type="text" name="firstname"  placeholder="First Name">
-    </p>
-    <p>
+    </div>
+    <div class="form-group row">
         <label for="lastname">Last Name</label><br>
         <input type="text" name="lastname" value="<?php if(!empty(isset($_SESSION['lastname']))){
             echo $_SESSION['lastname'];
             
         } ?>" placeholder="Last Name">
-    </p>
-    <p>
+    </div>
+    <div class="form-group row">
         <label for="email">Email</label><br>
         <input type="email" name="email" value="<?php if(!empty(isset($_SESSION['email']))){
             echo $_SESSION['email'];
             
         } ?>" placeholder="Email">
-    </p>
-    <p>
+    </div>
+    <div class="form-group row">
         <label for="email">Password</label><br>
         <input type="password" name="password" placeholder="Password" require>
-    </p>
-    <p>
+    </div>
+    <div class="form-group row">
         <label for="gender">Gender</label><br>
         <select name="gender">
             <option>Select</option>
@@ -61,10 +61,10 @@ checkUserRole();
             } ?>
             >Male</option>
         </select>
-    </p>
+    </div>
     <hr>
 
-    <p>
+    <div class="form-group row">
         <Label>Designation</Label><br>
         <select name="designation">
             <option>Select</option>
@@ -78,16 +78,30 @@ checkUserRole();
             echo "selected"; 
             ?>>Patient</option>
         </select>
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group row">
         <label for="department">Department</label><br>
-        <input type="text" name="department"  placeholder="Department">
-    </p>
+        <select name="department">
+            <option selected="selected">Select</option>
+            <option <?php if(!empty(isset($_SESSION['department'])) && isset($_SESSION['department'])== "Services"){
+                echo "selected";
+                
+            } ?> >Services</option>
+            <option <?php if(!empty(isset($_SESSION['department'])) && isset($_SESSION['department'])== "Laboratory"){
+                echo "selected";
+                
+            } ?>
+            >Laboratory</option>
+        </select>
+    </div>
 
-    <p>
-        <button type="submit">Register</button> <p> <button type="reset">Reset</button></p>
-    </p>
+    <div class="form-group row">
+        <button type="submit">Register</button> <br>
+    </div>
+        <div class="form-group row">
+        <button type="reset">Reset</button></p>
+    </div>
         
     </form>
 

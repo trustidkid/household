@@ -28,7 +28,7 @@
             if(isset($_SESSION[$type[$i]]) && !empty(isset($_SESSION[$type[$i]]))){
                 echo "<span style='color:".$color[$i]."' >" . $_SESSION[$type[$i]] . "</span>";
             }
-            $_SESSION[$type[$i]] ="";
+            $_SESSION[$type[$i]] = "";
         }
         
     }

@@ -11,6 +11,7 @@
     
     $appointmentlist = scandir("db/appointment/");
     $userlist = scandir("db/users/");
+    $paymentlist = scandir("db/payments/");
 
     echo "
         <table class='table table-striped table-bordered table-hover'>
@@ -22,41 +23,64 @@
             <th >Initial Complaint</th>
             <th >Department</th>
             <th >Register Date</th>
-            <th >Preview</th>
+            <th >Payment Status</th>
+            <th >Detail</th>
         </tr>";
 
-    $doctorEmail = $_SESSION['loggedIn'].".json";
-    //Search for Doctor's department
-    for($i =2; $i < count($userlist); $i++){
-        
-        if($doctorEmail == $userlist[$i]){
-            $doctorString = file_get_contents("db/users/". $userlist[$i]);
-            $doctorObject = json_decode($doctorString);
-            $doctordepartment = $doctorObject -> department;
+    $doctordepartment = $_SESSION['department'];
 
-            for($count=2; $count < count($appointmentlist); $count++){
-                $countPatient ="";
-                //get the list of all appointments
-                $appointmentString = file_get_contents("db/appointment/". $appointmentlist[$count]);
-                $appointmentObject = json_decode($appointmentString);
-                $appointmentdepartment = $appointmentObject -> department;
+   /* for($i=2; $i < count($paymentlist); $i++){
+        $paymentString = file_get_contents("db/payments/".$paymentlist[$i]);
+        $paymentObject = json_decode($paymentString);
 
-                //if($appointmentString == )
+        //get appointment id from payment table
+        $appointmentidfrompayment = $paymentObject -> appointmentid;
+        $status = $paymentObject -> status;
 
-                //chechk if department patient have appointment with is the same as doctor department
-                if($doctordepartment == $appointmentdepartment){
+    }*/
 
-                    $countPatient = $count;
-                    $appointmentdate = $appointmentObject -> appointmentdate;
-                    $appointmenttime = $appointmentObject -> appointmenttime;
-                    $nature_of_appointment = $appointmentObject -> nature_of_appointment;
-                    $complaint = $appointmentObject -> complaint;
-                    $dateRegister = $appointmentObject -> date;
-                    $email = $appointmentObject -> email;
+    for($count=2; $count < count($appointmentlist); $count++){
+            
+        //get the list of all appointments
+        $appointmentString = file_get_contents("db/appointment/". $appointmentlist[$count]);
+        $appointmentObject = json_decode($appointmentString);
+        $appointmentdepartment = $appointmentObject -> department;
+
+        //chechk if department patient have appointment with is the same as doctor department
+        if($doctordepartment == $appointmentdepartment){
+            $countpay = count($paymentlist);
                     
-                    //get patient data from user table
-                    $patientString = file_get_contents("db/users/".$email.".json");
-                    $patientObject = json_decode($patientString);
+            
+            //store number of patient
+            $countPatient = $count;
+            $appointmentidfromDB = $appointmentObject -> id;
+            $appointmentdate = $appointmentObject -> appointmentdate;
+            $appointmenttime = $appointmentObject -> appointmenttime;
+            $nature_of_appointment = $appointmentObject -> nature_of_appointment;
+            $complaint = $appointmentObject -> complaint;
+            $dateRegister = $appointmentObject -> date;
+            $email = $appointmentObject -> email;
+
+            for($i=2; $i < count($paymentlist); $i++){
+                $paymentString = file_get_contents("db/payments/".$paymentlist[$i]);
+                $paymentObject = json_decode($paymentString);
+        
+                //get appointment id from payment table
+                $appointmentidfrompayment = $paymentObject -> appointmentid;
+                $status = $paymentObject -> status;
+                
+                //get payment status
+                $paymentstatus = "<span class='glyphicon glyphicon-remove' style='color:red;'></span>";
+                if($appointmentidfrompayment == $appointmentidfromDB && $status == '1' ){
+                    $paymentstatus = "<span class='glyphicon glyphicon-ok' style='color:green'></span>";
+                    //break out of the inner loop
+                    
+                    break;
+                }
+            }
+
+            //get patient data from user table
+            $patientObject = findUser($email);
                     $firstname = $patientObject -> firstname ;
                     $lastname = $patientObject -> lastname;
                     $email = $patientObject -> email;
@@ -73,22 +97,24 @@
                     <td >".$nature_of_appointment."</td>
                     <td >".$complaint."</td>
                     <td >".$doctordepartment."</td>
-                    <td >".$dateRegister."</td>
-                    <td>
+                    <td  >".$dateRegister."</td>
+                    <td style='text-align:center'>".$paymentstatus."</span></td>
+                    <td style='text-align:center'>
                         <a href='patientview.php?id=$email'>
-                            view
+                        <span class='glyphicon glyphicon-zoom-in'>
                             </a>
                     </td>".
                     "</tr>";
                 }
             }
-        }
+       // }
         
         //die();
-    }
+  //  }
     echo "</table>";
+    
     //display when no patient department matches doctor department
-    if($countPatient < 1)
+    if($countPatient <= 2 )
     echo  "<strong><span style='color: red'>You have no pending appointments!</span></strong></div>";
     
 

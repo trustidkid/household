@@ -14,13 +14,6 @@ require_once('functions/alert.php');
    $complaint = $_POST['complaint'] != "" ? $_POST['complaint'] : $errorcount++;
    $department = $_POST['department'] != "" ? $_POST['department'] : $errorcount++;
 
-
-   $_SESSION['appointmentdate'] = $appointmentdate;
-   $_SESSION['appointmenttime'] = $appointmenttime;
-   $_SESSION['nature_of_appointment'] = $nature_of_appointment;
-   $_SESSION['complaint'] = $complaint;
-   $_SESSION['department'] = $department;
-
   
    if(isset($_SESSION['loggedIn'])){
         $email = $_SESSION['loggedIn'];
@@ -34,6 +27,12 @@ require_once('functions/alert.php');
        $_SESSION['error'] .=  " in your form";
        header('Location: appointment.php');
    }else{
+
+    $_SESSION['appointmentdate'] = $appointmentdate;
+   $_SESSION['appointmenttime'] = $appointmenttime;
+   $_SESSION['nature_of_appointment'] = $nature_of_appointment;
+   $_SESSION['complaint'] = $complaint;
+   $_SESSION['department'] = $department;
 
     //generate appointment ID
     $directory = "db/appointment";
@@ -55,8 +54,7 @@ require_once('functions/alert.php');
         'department' => $department,
         'date' => $dateRegister
     ];
-    //echo "got here the  is ". $email;
-    //die();
+    
     //check that user has not book appointment same day before
     $appointmentExists = findAppointment($email,$department,$appointmentdate);
     //echo $appointmentExists;
@@ -70,7 +68,7 @@ require_once('functions/alert.php');
         die();
     }
     
-    //TODO: To ensure patient can save multiple records with same name
+    
     //save user 
     //saveAppointment($filename,$appointmentObject);
     $save = file_put_contents("db/appointment/".$filename.".json",json_encode($appointmentObject));

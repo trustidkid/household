@@ -43,6 +43,7 @@ if( $counterror > 0){
             $userObject = json_decode($userString);
             $passwordfromDb = $userObject -> password;
             $firstname = $userObject -> firstname;
+            $lastname = $userObject -> lastname;
             $userlevel = $userObject -> designation;
             $userDept = $userObject -> department;
             $dateregister = $userObject -> date;
@@ -83,6 +84,7 @@ if( $counterror > 0){
                 //save parameters in a session
                 $_SESSION['loggedIn'] = $username;
                 $_SESSION['firstname'] = $firstname;
+                $_SESSION['lastname'] = $lastname;
                 $_SESSION['email'] = $username;
                 $_SESSION['department']= $userDept;
                 $_SESSION['userlevel'] = $userlevel;
