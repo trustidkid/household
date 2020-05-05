@@ -52,6 +52,31 @@
         }
         return false;
     }
+    /**
+     * Get a single appointment
+     */
+
+    function getSingleAppointment($id){
+        if(!$id || $id == ""){
+            set_alert("error", "User email not found");
+            header("location: dashboard.php");
+            die();
+        }
+
+        $allappointment = scandir("db/appointment/");
+        
+        for($counter = 1; $counter <= count($allappointment); $counter++){
+            $filename = "ap_".$counter.".json";
+            $appointmentString = file_get_contents("db/appointment/". $filename);
+            $appointmentObject = json_decode($appointmentString);
+            $idfromDb = $appointmentObject -> id;
+
+            if($id == $idfromDb){
+                return $appointmentObject;
+           }
+        }
+        return false;
+    }
 
     /**
      * Check if an appointment already exist
@@ -329,10 +354,9 @@ function getAllPayment(){
         <tr>       
             <td>".$paymentdate."</td>
             <td >".$patientemail."</td>
-            <td>".$amount."</td>
-            <td>".$appointmentid."</td>
-            <td>
-                <a href='appointment.php?id=$appointmentid'>
+            <td style='text-align:center; width:10%'>".$amount."</td>
+            <td style='text-align:center; width:5%'>
+                <a href='viewappointment.php?id=$appointmentid'>
                 <span class='glyphicon glyphicon-zoom-in'></span>
                 </a>
             </td>        

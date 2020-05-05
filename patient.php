@@ -17,10 +17,11 @@ echo "<p>
 </p>";
 echo "<table class='table table-striped table-bordered table-hover'>
       <caption><h3>Payment History</h3></caption>
+      <tr style='background-color: #344955; color: white'>
       <th>Payment date</th>
       <th>Email</th>
       <th>Amount Paid</th>
-      <th>View appointment</th>";
+      <th>View appointment</th></tr>";
 
 if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
 
