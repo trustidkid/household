@@ -1,6 +1,7 @@
 <? 
     include("lib/header.php");
     require_once("functions/alert.php");
+    require_once("functions/user.php");
 
     /**
  * PHPMAILER SETUP START
@@ -26,6 +27,8 @@ $mail->Port = 2525;
  * PHPMAILER SETUP END
  */
 
+ echo "<div>".print_alert()."</div><br><div>".backButton("patient.php")."</div>";
+
 if (isset($_GET['txref'])) {
 
     
@@ -37,7 +40,7 @@ if (isset($_GET['txref'])) {
     $amountfromDB = $_SESSION['amount'];
 
     $ref = $_GET['txref'];
-    echo $ref;
+    //echo $ref;
     $amount = $amountfromDB;// ""; //Correct Amount from Server
     $currency = "NGN"; //Correct Currency from Server
 
@@ -101,7 +104,7 @@ if (isset($_GET['txref'])) {
               if($save){
 
                 $subject = "Payment was successful";
-                $message = "You have successfully make payment for the selected appointment";
+                $message = "Your payment has been received. "."<br>"."Thank you";
 
                 $mail->setFrom('no-reply@snh.com', 'SNH Hospital');
                 $mail->addReplyTo('info@msnh.com', 'SNH');
@@ -113,7 +116,7 @@ if (isset($_GET['txref'])) {
 
                 if($mail->send()){
                     set_alert("message","Payment was successful");
-                    header("location: paymentsuccess.php");
+                    header("location: patient.php");
                 }else{
                     $content = "Something went wrong. We cannot proceed further. Please try again later ".$username;
                     set_alert("error",$content);
@@ -126,9 +129,11 @@ if (isset($_GET['txref'])) {
               }
 
             }
-
+            
+            header("location: patient.php");
             } else {
                 //Dont Give Value and return to Failure page
+                header("location: error.php");
             }
       }
      // else {
