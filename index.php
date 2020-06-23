@@ -54,7 +54,7 @@
  <div class='container'>
   <div class='row'>
     <div class='col-sm-12'>
-        <h2><span style='color: blue'>Start.ng Hospital Application</span></h2>
+        <h2><span style='color: blue'>Hospital Application</span></h2>
       
         <p>
           <h4> The application helps hospital reduces issue related to attending to patient.
