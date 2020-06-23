@@ -130,15 +130,16 @@ if (isset($_GET['txref'])) {
 
             }
             
-            header("location: patient.php");
+            
             } else {
                 //Dont Give Value and return to Failure page
                 header("location: error.php");
             }
       }
-     // else {
+      else {
        //   die('No reference supplied');
-  //}
+       //header("location: patient.php");
+  }
 
   //backButton("patient.php");
 ?>

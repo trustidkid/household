@@ -3,6 +3,6 @@ session_start();
 session_unset();
 session_destroy();
 
-header("location: index.php?logout=out");
+header("location: index.php");
 
 ?>

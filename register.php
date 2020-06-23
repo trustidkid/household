@@ -14,9 +14,12 @@ checkUserRole();
 
     <form role="form" method="POST" action="processRegister.php">
 
-    <?php
-    print_alert();
-    ?>
+    <div>
+        <?php
+        print_alert();
+        ?>
+    </div>
+    
 
     <div class="form-group row">
         <label for="firstname">First Name</label><br>
